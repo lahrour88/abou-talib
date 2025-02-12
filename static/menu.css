@@ -1,0 +1,150 @@
+body { margin: 0px;
+  font-family: Arial, sans-serif;
+   background-color: rgb(173, 219, 235);
+   }
+
+.navbar { 
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items:center; 
+  justify-content:space-between; 
+  background-color: rgb(13, 208, 222);
+  padding: 10px 20px; color: rgb(8, 8, 8); 
+  height: 43px; 
+  box-shadow: rgb(156, 247, 255) 1px 3px 15px; 
+  margin-right: -10px; 
+  z-index: 5; 
+  top: 0px;
+  transition: top 0.2s;
+}
+.navbar img { 
+    width: 53px; 
+    margin-left:0px; 
+    margin-right: 10px; 
+    margin-top: 6px;
+    z-index: 1; }
+  .nav-text{
+    color: rgb(255, 255, 255);
+    
+    }
+
+.logo1 { 
+  font-size: 20px;
+  font-weight: bold; 
+  position: fixed; 
+  left: 9px; 
+  z-index: 1; }
+
+.nav-text { 
+  font-size: 27px; 
+  position: fixed; 
+  margin-right: 52%; 
+  z-index: 1;
+ color: rgb(255, 255, 255);
+ }
+
+.menu-btn { 
+  background: none; 
+  border: none; color: rgb(255, 255, 255); 
+  cursor: pointer; 
+  position: fixed; 
+  right: 20px; 
+  font-size: 37px; 
+  z-index: 5;
+}
+
+.menu { 
+  position:fixed; 
+  top: 54px; 
+  right: -250px; 
+  height:100%; 
+  width: 460px; 
+  padding: 20px; 
+  font-size: 24px; 
+  transition: transform 0.5s; 
+  transform: translateX(100%); 
+  background-color: rgb(137, 220, 231); 
+  z-index: 3; }
+
+.menu a { 
+  display: block; 
+  color: rgb(255, 255, 255); 
+  text-decoration: none; 
+  background-color: rgba(91, 236, 241, 0.821); 
+  padding: 5px; 
+  margin-top: 23px; 
+  border: none; 
+  border-radius: 12px; 
+  z-index: 3; 
+  box-shadow: rgba(82, 148, 174, 0.631) 0px 7px 13px; 
+  margin-right: 233px; 
+  width: 230px; 
+  height: 40px;
+  text-align: center; 
+}
+.menu a img{
+  width: 100%;
+  position: relative;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.menu a:hover { 
+  padding: 6px 6px 6px 8px; 
+  transition: 0.4s; 
+  box-shadow: rgba(18, 238, 47, 0.42) 0px 3px 8px; }
+
+.menu.active { transform: translateX(0px); }
+/* ...width phones... */
+@media (max-width:768px) {
+  .navbar{
+    position: fixed;
+    width: 100%;
+  }
+  .nav-text{
+    margin-right: 0;
+    position: absolute;
+    left: 100px;
+  }
+}
+/* ...width tablets... */
+@media screen and (min-width: 768px) {
+  .nav-text{
+     font-size: 34px;
+     left: 80px;
+  }
+}
+/* ...width desktops... */
+@media screen and (min-width:1024px) {
+  .menu {
+    position: fixed;
+    top: 54px;
+    right: 0;
+    height: 100%;
+    width:19%;
+    padding: 20px;
+    font-size: 23px;
+    transform: none;
+    background-color: rgb(14, 223, 251);
+    z-index: 3;
+    display: block;
+  }
+  .menu a{
+    margin-right: 1px;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+  .navbar .nav-text { 
+    font-size: 34px; 
+    position: sticky; 
+    margin-right: 71%; 
+    }
+  
+  .article {
+    width: 76%;
+    margin-right: 23%;
+  }
+}

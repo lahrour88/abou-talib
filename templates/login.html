@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            display: inline-block;
+            text-align: right;
+            margin-top: 20px;
+            background-color: rgb(210, 249, 218);width: 370px;
+            border-radius: 12px;
+            height: 370px;
+            position: relative;
+            left: 3px;
+            
+
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            margin-top: 30px;
+            position: relative;
+            top: 15px;
+            width: 88%;
+            border: 1.5px solid rgb(91, 149, 241);
+            border-radius: 12px;
+            right: 10px;
+
+        }
+        label{
+            color: black;
+            position: relative;
+            top: 36px;
+            z-index: 6;
+            font-size: 20px;
+            right: 25px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+        button{
+            position: relative;
+            top: 30px;
+            right: 35%;
+            font-size: 20px;
+            width: 110px;
+            height:auto;
+            border: 1px solid rgb(55, 255, 32);
+            background-color: rgb(233, 233, 233);
+            border-radius: 5px;
+            box-shadow: 00 6px 2px rgba(113, 252, 113, 0.35);
+        }
+        span{
+            font-size: 30px;
+            margin-right: 30%;
+            position: relative;
+            top: 14px;
+        }
+    </style>
+</head>
+<body>
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        <span>تسجيل الدخول</span>
+        <br>
+        <label for="gmail">البريد الإلكتروني:</label>
+        <input type="gmail" id="gmail" name="gmail" required>
+
+        <label for="password">كلمة المرور:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">دخول</button>
+    </form> 
+</body>
+</html>

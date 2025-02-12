@@ -1,0 +1,60 @@
+.article .post{
+    background-color: rgba(181, 229, 235, 0.523);
+    width: 99.7%;
+    margin-left: 1px;
+    border-radius: 12px 0px 12px 0px;
+    border: 2px solid rgb(157, 157, 157);
+    height: 64px;
+}
+.post .profile{
+    width: 50.4px;
+    height: 50px;
+    position: relative;
+    right: 3px;
+    padding: 0.8px;
+    border-radius: 50px;
+    border: 2px solid rgb(43, 246, 7);
+}
+span{
+    color: rgb(244, 59, 59);
+    position: relative;
+    bottom: 20.4px;
+    right: 12px;
+    font-size: 22px;
+    border-radius: 9px;
+    padding: 2px 5px;
+    border: 1.5px solid rgb(196, 203, 203);
+}
+    .paragraph {
+        max-height: 100px; /* يتم تحديد ارتفاع افتراضي */
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+      }
+      
+      .paragraph.collapsed {
+        max-height: 28px;
+      }
+      
+.paragraph{
+    color: rgb(36, 36, 36);
+    font-size: 16px;
+    line-height: 2;
+    width: 97%;
+    margin-right: 10px;
+}
+.article .toggle-link{
+    color: rgb(62, 60, 63);
+    position: relative;
+    top: -10px;
+    right: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    text-shadow: 1px 2px 2px rgba(22, 205, 255, 0.597);
+}
+b{
+    color: rgb(86, 87, 87);
+    font-size: 15px;
+    position: absolute;
+    left: 16px;
+    top: 26px;
+}

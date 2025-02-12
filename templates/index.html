@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar", dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عبد الهادي ابو طالب</title>
+    <meta type="description" content="الموقع الرسمي للثانوية التاهيلية عبد الهادي ابو طالب">  
+    <link rel="shortcut icon" href="static/img/OIP.jpg" type="image/png" class="con">
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/menu.css">
+    <link rel="stylesheet" href="static/profile_page1.css">
+    <!-- PWA Meta -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<meta name="theme-color" content="#007bff">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/web-app192x192.png') }}">
+
+<!-- تسجيل Service Worker -->
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/service-worker.js')
+            .then((reg) => console.log("Service Worker Registered", reg))
+            .catch((err) => console.log("Service Worker Failed", err));
+    }
+</script>
+</head>
+<body>
+    <!--navbare-->
+    <nav class="navbar">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <div class="nav-text">abou talib.com</div>
+        <div class="logo1"><img src="static/img/logo.png" width="38px"></div>
+      </nav>
+      <div class="menu" id="menu">
+        <a href="{{url_for('takafa')}}">الثقافة و الفنون</a>
+        <a href="{{url_for('arabec')}}">تحدي القرائة العربي</a>
+        <a href="{{url_for('home')}}">الاخبار</a>
+        <a href="{{url_for('post_add')}}">لوحة القيادة</a>
+    </div>
+    <main>
+        {% for post in posts %}
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile">
+                <span>arabec</span>
+                <b>{{post.date}}</b>
+            </div>
+        {% if post.photo_url %}
+        <img src="{{post.photo_url}}">
+        {% endif %}
+        {% if post.vedio %}
+        <video src="{{ post.vedio }}" controls></video>
+        {% endif %}
+
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph{{post.id}}" class="paragraph">
+                {{post.body}}
+            </p>
+            <a href="javascript:void(0);" id="toggle-link{{post.id}}" class="toggle-link">عرض المزيد</a> 
+        </section>
+        {% endfor %}
+            <!--sections1-->
+            <section class="article">
+                <div class="post">
+                    <img src="static/img/OIP.jpg" class="profile">
+                    <span>sport</span>
+                </div>
+                <img src="https://i1.hespress.com/wp-content/uploads/2023/07/canunder23-768x512.jpg" alt="صورة مقال">
+                <h2>//:::::::::::::::::://</h2>
+                <p id="paragraph2" class="paragraph">
+                    هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                </p>
+                <a href="javascript:void(0);" id="toggle-link2" class="toggle-link">عرض المزيد</a> 
+            </section>
+            <!--sections2-->
+            <section class="article">
+                <div class="post">
+                    <img src="static/img/OIP.jpg" class="profile">
+                    <span>sport</span>
+                </div>
+                <img src="https://sport.lesiteinfo.com/wp-content/uploads/2024/02/kac.jpg" alt="صورة مقال" >
+                <h2>//:::::::::::::::::://</h2>
+                <p id="paragraph3" class="paragraph">
+                    هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                </p>
+                <a href="javascript:void(0);" id="toggle-link3" class="toggle-link">عرض المزيد</a> 
+            </section>
+            <!--sections3-->
+            <section class="article">
+                <div class="post">
+                    <img src="static/img/OIP.jpg" class="profile">
+                    <span>sport</span>
+                </div>
+                <img src="https://i.ytimg.com/vi/UeQWy0kCQx0/maxresdefault.jpg" alt="صورة مقال" >
+                <h2>//:::::::::::::::::://</h2>
+                <p id="paragraph4" class="paragraph">
+                    هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                </p>
+                <a href="javascript:void(0);" id="toggle-link4" class="toggle-link">عرض المزيد</a> 
+            </section>
+            <!--sections4-->
+            <section class="article">
+                <div class="post">
+                    <img src="static/img/OIP.jpg" class="profile">
+                    <span>sport</span>
+                </div>
+                <img src="https://www.maroc24.com/wp-content/uploads/2022/09/basket.jpg" alt="صورة مقال" >
+                <h2>//:::::::::::::::::://</h2>
+                <p id="paragraph5" class="paragraph">
+                    هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                </p>
+                <a href="javascript:void(0);" id="toggle-link5" class="toggle-link">عرض المزيد</a> 
+            </section>
+            <!--sections5-->
+            <section class="article">
+                <div class="post">
+                    <img src="static/img/OIP.jpg" class="profile">
+                    <span>sport</span>
+                </div>
+                <img src="https://www.maroc24.com/wp-content/uploads/2023/03/%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AE%D8%A8-%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A-%D9%84%D9%83%D8%B1%D8%A9-%D8%A7%D9%84%D9%82%D8%AF%D9%85-%D8%A7%D9%84%D8%B4%D8%A7%D8%B7%D8%A6%D9%8A%D8%A9.jpg" alt="صورة مقال" >
+                <h2>//:::::::::::::::::://</h2>
+                <p id="paragraph6" class="paragraph">
+                    هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                </p>
+                <a href="javascript:void(0);" id="toggle-link6" class="toggle-link">عرض المزيد</a> 
+            </section>
+    </main>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        }
+      </script>
+      <script src="/static/js/script.js"></script>
+
+    <script src="static/js/java.js"></script>
+</body>
+</html>

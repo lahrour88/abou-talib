@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar", dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الثانوية التاهيلية عبد الهادي ابو طالب</title>
+
+    <link rel="shortcut icon" href="static/img/log-takafa.jpg" type="image/png">
+    <!--lin style-->
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/menu.css">
+    <link rel="stylesheet" href="static/profile_page1.css">
+</head>
+<body>
+    <!--navbare-->
+    <nav class="navbar">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <div class="nav-text">abou talib.com</div>
+        <div class="logo1"><img src="static/img/logo.png" width="38px"></div>
+    </nav>
+    <div class="menu" id="menu">
+        <a href="{{url_for('sport')}}"> الرياضة</a>
+        <a href="{{url_for('takafa')}}">الثقافة و الفنون</a>
+        <a href="{{url_for('home')}}">الاخبار</a>
+        <a href="{{url_for('post_add')}}">لوحة القيادة</a>
+    </div>
+    <main>
+        {% for post in posts %}
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+                <b>{{post.date}}</b>
+            </div>
+        {% if post.photo_url %}
+        <img src="{{post.photo_url}}" loading="lazy">
+        {% endif %}
+        {% if post.vedio %}
+        <video src="{{ post.vedio }}" controls></video>
+        {% endif %}
+
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph{{post.id}}" class="paragraph">
+                {{post.body}}
+            </p>
+            <a href="javascript:void(0);" id="toggle-link{{post.id}}" class="toggle-link">عرض المزيد</a> 
+        </section>
+        {% endfor %}
+        <!--sections1-->
+        
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+            </div>
+            <img src="https://th.bing.com/th/id/OIP.2x3K4Yyd4lwFHOKqXR6_4AHaHa?rs=1&pid=ImgDetMain" loading='lazy' alt="صورة مقال" >
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph1" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link1" class="toggle-link">عرض المزيد</a>    
+        </section>
+        <!--section2-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+            </div>
+            <img src="https://th.bing.com/th/id/OIP.5taUYwZcqUGp9ARknb1TCQHaHa?rs=1&pid=ImgDetMain" loading="lazy">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph2" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link2" class="toggle-link">عرض المزيد</a>
+        </section>
+        <!--sections3-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+            </div>
+            <img src="https://rakaa.sch.ae/ar/wp-content/uploads/2023/02/RAKAA-Reading-Challenge-1024x576.png"loading="lazy" alt="صورة مقال">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph3" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                
+            </p>
+            <a href="javascript:void(0);" id="toggle-link3" class="toggle-link">عرض المزيد</a>
+        </section>
+        <!--sections4-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+            </div>
+            <img src="https://i.ytimg.com/vi/iJ3fY0m_WG8/maxresdefault.jpg" alt="صورة مقال" loading="lazy">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph4" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                
+            </p>
+            <a href="javascript:void(0);" id="toggle-link4" class="toggle-link">عرض المزيد</a>
+        </section>
+        <!--sections5-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/OIIP.jpeg" class="profile" loading="lazy">
+                <span>arabec</span>
+            </div>
+            <img src="https://rakaa.sch.ae/ar/wp-content/uploads/2023/02/White-Yellow-Blue-Fun-English-Classroom-Reading-Corner-Educational-Poster.png" loading="lazy" alt="صورة مقال">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph5" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+                
+            </p>
+            <a href="javascript:void(0);" id="toggle-link5" class="toggle-link">عرض المزيد</a>
+        </section>
+    </main>
+    <script src="static/js/java.js"></script>
+</body>
+</html>

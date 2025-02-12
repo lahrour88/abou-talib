@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add post</title>
+    <style>
+        form {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #cbf4f875;
+    border: 1px solid #ddd;
+    margin-top: 100px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    direction: rtl; /* لدعم النص العربي */
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+    direction: rtl; /* لدعم النص العربي */
+}
+
+form input[type="text"]::placeholder {
+    color: #aaa;
+    font-size: 14px;
+}
+
+form label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form textarea {
+    resize: none;
+}
+
+form .button {
+    text-align: center;
+}
+
+form input[type="submit"] {
+    color: white;
+    font-size: 18px;
+    background-color: #f9b755;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #ce9340;
+}
+.home{
+text-decoration: none;
+color: #fff;
+font-size: 19px;
+position: relative;
+top: 43px;
+padding: 10px;
+border-radius: 7px;
+border: 1px solid rgba(0, 0, 0, 0);
+background-color: #f52424;
+    
+}
+option{color: #333;
+font-size: 20px;}
+@media screen and(max-width: 740px) {
+    form {
+        width: 90%;
+    }
+
+    form input[type="submit"] {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+
+<form action="{{url_for('post_add')}}" method="POST">
+    <div><input type="text" name="photo_url" placeholder="  رابك الصورة"></div>
+    <div><input type="text" name="vedio" placeholder="   رابط فيديو"></div>
+    <label for="date">تاريخ اليوم :</label>
+    <div><input type="date" name="date" id="date" required></div>
+    <div><textarea type="text" name="body" rows="4" cols="36" placeholder="اكتب نص ..."></textarea></div>
+    <div>
+        <label for="page">اختر الصفحة:</label>
+        <select name="page" id="page">
+            <option value=""> اختر وجهة المنشور</option>
+            <option value="home">الصفحة الرئيسية</option>
+            <option value="sport">الرياضة</option>
+            <option value="takafa">الثقافة</option>
+            <option value="arabec">العربية</option>
+        </select>
+    </div>
+    <a class="home" href="{{url_for('home')}}">الغاء النشر</a>
+    <div class="button"><input type="submit" value="نشر" style="color: red; font-size: 20px; background-color: rgb(249, 183, 85); height: 50px; width: 140px; position: relative; right: 26%;"></div>
+</form>
+
+</body>
+</html>

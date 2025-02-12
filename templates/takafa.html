@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar", dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>takafa</title>
+    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/menu.css">
+    <link rel="stylesheet" href="static/profile_page1.css">
+</head>
+<body>
+    <nav class="navbar">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <div class="nav-text">abou talib.com</div>
+        <div class="logo1"><img src="static/img/logo.png" width="38px"></div>
+      </nav>
+      <div class="menu" id="menu">
+        <a href="{{url_for('sport')}}"> الرياضة</a>
+        <a href="{{url_for('arabec')}}">تحدي القرائة العربي</a>
+        <a href="{{url_for('home')}}">الاخبار</a>
+        <a href="{{url_for('post_add')}}">لوحة القيادة</a>
+      </div>
+    <main>
+        {% for post in posts %}
+        <section class="article">
+            <div class="post">
+                <img src="static/img/log-takafa.jpg" class="profile">
+                <span>takafa</span>
+                <b>{{post.date}}</b>
+            </div>
+        {% if post.photo_url %}
+        <img src="{{post.photo_url}}">
+        {% endif %}
+        {% if post.vedio %}
+        <video src="{{ post.vedio }}" controls></video>
+        {% endif %}
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph{{post.id}}" class="paragraph">
+                {{post.body}}
+            </p>
+            <a href="javascript:void(0);" id="toggle-link{{post.id}}" class="toggle-link">عرض المزيد</a> 
+        </section>
+        {% endfor %}
+        <!--sections1-->
+        <!--sections2-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/log-takafa.jpg" class="profile">
+                <span>takafa</span>
+            </div>
+            <img src="https://www.almrsal.com/wp-content/uploads/2021/12/7-30.jpg" alt="صورة مقال">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph2" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link2" class="toggle-link">عرض المزيد</a> 
+        </section>
+        <!--sections3-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/log-takafa.jpg" class="profile">
+                <span>takafa</span>
+            </div>
+            <img src="https://th.bing.com/th/id/R.76e720a44b10af28e1fec78eeab6fc47?rik=iL2s0upFablSWQ&pid=ImgRaw&r=0" alt="صورة مقال">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph3" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link3" class="toggle-link">عرض المزيد</a> 
+        </section>
+        <!--sections4-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/log-takafa.jpg" class="profile">
+                <span>takafa</span>
+            </div>
+            <img src="static/img/mara.avif" alt="صورة مقال" >
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph4" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link4" class="toggle-link">عرض المزيد</a> 
+        </section>
+        <!--sections5-->
+        <section class="article">
+            <div class="post">
+                <img src="static/img/log-takafa.jpg" class="profile">
+                <span>takafa</span>
+            </div>
+            <img src="https://www.mosoah.com/wp-content/uploads/2019/12/Visual-arts.jpg" alt="صورة مقال">
+            <h2>//:::::::::::::::::://</h2>
+            <p id="paragraph5" class="paragraph">
+                هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى. هذا هو النص الكامل للفقرة الأولى.
+            </p>
+            <a href="javascript:void(0);" id="toggle-link5" class="toggle-link">عرض المزيد</a> 
+        </section>
+    </main>
+    <script src="static/js/java.js"></script>
+</body>
+</html>
