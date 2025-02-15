@@ -47,6 +47,14 @@ def sport():
     posts = [post for post in post_store.get_all() if post.page == 'sport']
     return render_template('index.html', posts=posts,)
 
+@app.route('/google5af1f70e8206f4e3.html')
+def google_verification():
+    return send_from_directory(app.static_folder, 'google5af1f70e8206f4e3.html')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(app.static_folder, 'sitemap.xml')
+
 
 @app.route('/arabec')
 def arabec():
