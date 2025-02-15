@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /post_add/
+Sitemap: https://aboutalib.vercel.app/sitemap.xml

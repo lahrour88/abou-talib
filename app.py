@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session ,send_from_directory
 from store import Post, PostStore
 from supabase import create_client, Client
 import os
@@ -27,6 +27,16 @@ def load_posts():
         app.current_id = max(app.current_id, new_post.id + 1)
 
 load_posts()
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
+# Route for sitemap.xml
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(app.static_folder, 'sitemap.xml')
+
 @app.route('/takafa')
 def takafa():
     posts = [post for post in post_store.get_all() if post.page == 'takafa']
