@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ar" dir="ltr">
+    <head>
+        <title>ثانوية عبدالهادي ابوطالب</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/css/bootstrap-icons.css" rel="stylesheet">
+        <link rel="" href="{{ url_for('static', filename='css/main.css') }}">
+        <meta name="google-site-verification" content="Ma5ZjeN-j2NZZq3Ip77aJvNI-0Jsea5lomrt5mHg6Z8" />
+        <link href="static/css/templatemo-topic-listing.css" rel="stylesheet">      
+        <link rel="manifest" href="static/manifest.json">
+        <script>
+            if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/sw.js')
+        .then(reg => console.log("✅ Service Worker Registered!", reg))
+        .catch(err => console.log("❌ Service Worker Failed!", err));
+}
+
+        </script>
+        <style>
+            
+.input-group {
+    display: flex;
+    align-items: center;
+    z-index: 44;
+  }
+  .input-group:hover{
+    transition: vertical .3s ease-in-out;
+    transform: translateY(-3px);
+  }
+  
+  .input {
+    min-height: 43px;
+    width: 50%;
+    max-width: 270px;
+    padding: 0 1rem;
+    color: #222223;
+    font-size: 16px;
+    border: 1px solid #848484;
+    border-radius: 20px 0 0 20px;
+    background-color: rgb(244, 250, 250);
+  }
+  
+  .button--submit {
+    min-height: 45px;
+    padding: 5.3px 2px;
+    border: 1px solid #848484;
+    border-radius: 0 20px 20px 0;
+    background-color: #6cbef1de;
+    color: rgb(231, 10, 197);
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+  }
+  
+  .button--submit:hover {
+    background-color: #9695d7;
+    color: #222223;
+  }
+  
+  .input:focus, .input:focus-visible {
+    border-color: #3898EC;
+    outline: none;
+  }
+  button{
+    font-size: 16px;
+    color: #6e6d6d;
+    background-color: rgba(236, 236, 236, 0);
+    border: none;
+  }
+    .dropdown-menu button:hover{
+    color: #7ba1f2;
+    transform: translateY(-10px); /* اجعل الزر يرتفع بمقدار 10px */
+    transition: transform 0.8s ease-in-out; /* أضف تأثير الانتقال */
+  }
+
+  
+        </style>
+    </head>
+    
+    <body id="top">
+        {%include "appbare.html" %}
+        <main>
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h4 class="text-white text-center">مرحبا بك في الموقع الرسمي لثانوية عبدالهادي ابوطالب</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="featured-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+<!--post 1-->
+                        <div class="col-lg-4 col-12 mb-4 mb-lg-0"  style="position: relative; top: 38.8px;">
+                            <div class="custom-block bg-white shadow-lg">
+                                <a href="{{url_for('sport')}}">
+                                    <div class="d-flex">
+                                        <div>
+                                            <h4 class="mb-2">الرياضة</h4>
+
+                                            <p class="mb-0">اطلع على جميع الانشطة الياضية بالمؤسسة
+                                            ⚽🏀🏏</p>
+                                        </div>
+
+                                        <span class="badge bg-design rounded-pill ms-auto">⚽</span>
+                                    </div>
+
+                                    <img src="static/images/focus_sport-fb-removebg-preview.png" class="custom-block-image img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+<!--paragraph-->
+                        <div class="col-lg-6 col-12">
+                            <div class="custom-block custom-block-overlay">
+                                <div class="d-flex flex-column h-100">
+                                    <img src="static/images/businesswoman-using-tablet-analysis.jpg" class="custom-block-image img-fluid">
+
+                                    <div class="custom-block-overlay-text d-flex">
+                                        <div class="btne">
+                                            <h5 class="text-white mb-2">التعرف على الموقع</h5>
+
+                                            <p class="text-white">نبدة عن الموقhggghghii       ifiisppsp,fpfiifiifiiifع</p>
+
+                                            <a href="{{url_for('news')}}" class="btn custom-btn mt-2 mt-lg-3" style="position: relative;top: 84%;">Learn More</a>
+                                        </div>
+                                        
+                                        <span class="badge bg-finance rounded-pill ms-auto" style="position: absolute;left: 15px;">2</span>
+                                    </div>
+
+                                    <div class="section-overlay"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0" id="#takafa">
+                                            <div class="custom-block bg-white shadow-lg">
+                                                <a href="{{url_for('takafa')}}">
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h4 class="mb-2">الثقافة و الفنون</h5>
+
+                                                            <p class="mb-0">مسابقات الرسم و الثراث المغربي
+                                                                لوحات من انتاج و تصميم تلاميد المؤسسة
+                                                            </p>
+                                                        </div>
+
+                                                        <span class="badge bg-design rounded-pill ms-auto">3</span>
+                                                    </div>
+
+                                                    <img src="static/images/images-removebg-preview.png" class="custom-block-image img-fluid">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                            <div class="custom-block bg-white shadow-lg">
+                                                <a href="{{url_for('news')}}">
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">الاخبار</h5>
+
+                                                            <p class="mb-0">اخر الاخبار و الاعلانات التي تخص مدرستكة في انتضارك </p>
+                                                        </div>
+
+                                                        <span class="badge bg-design rounded-pill ms-auto" style="font-size: 22px;">📰</span>
+                                                    </div>
+
+                                                    <img src="static/images/journalist-is-searching-for-false-news-10961423-8798212.png" class="custom-block-image img-fluid" >
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!--debut-->
+<!--fin-->
+
+            <section class="faq-section section-padding" id="section_4">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <h2 class="mb-4">Frequently Asked Questions</h2>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-5 col-12">
+                            <img src="static/images/faq_graphic.jpg" class="img-fluid" alt="FAQs">
+                        </div>
+
+                        <div class="col-lg-6 col-12 m-auto">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        سوال
+                                        </button>
+                                    </h2>
+
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            سوال 1 <strong>السوال </strong>السوال 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        سؤال
+                                    </button>
+                                    </h2>
+
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            صصصصصص
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        سوال
+                                    </button>
+                                    </h2>
+
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            سؤال
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="contact-section section-padding section-bg" id="section_5">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12 text-center">
+                            <h2 class="mb-5">Get in touch</h2>
+                        </div>
+
+                        <div class="col-lg-5 col-12 mb-4 mb-lg-0">
+                            <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d555.1566862600189!2d-6.299343151007754!3d34.303992341570876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sau!4v1742853620197!5m2!1sen!2sau" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        
+                        
+                        <div class="col-lg-3 col-md-6 col-12 mx-auto">
+                            <h4 class="mb-3">Localisation</h4>
+
+                            <p>sidi yahya el Garb</p>
+
+                            <hr>
+
+                            <p class="d-flex align-items-center mb-1">
+                                <span class="me-2">Phone</span>
+
+                                <a href="tel: 110-220-3400" class="site-footer-link">
+                                    110-220-3400
+                                </a>
+                            </p>
+
+                            <p class="d-flex align-items-center">
+                                <span class="me-2">Email</span>
+
+                                <a href="mailto:exemple@gmail.com" class="site-footer-link">
+                                    exemple@gmail.com
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+        {%include "footer.html" %}
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+        <script src="static/js/jquery.sticky.js"></script>
+        <script src="/static/js/click-scrojs"></script>
+        <script src="static/js/custom.js"></script>
+        <script src="static/js/script.js"></script>
+        <script src="/static/lien.js"></script>
+    </body>
+</html>

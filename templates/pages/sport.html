@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abou-talib.com</title>
+    <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/index.cs">
+    <link rel="stylesheet" href="/static/css/profile_page1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+            {%include "appbare.html"%}
+    <main>
+
+        {% for post in posts %}
+        <section class="article">
+            <form action="/sport" method="POST">
+                <input type="hidden" name="name" value="{{post.name}}">
+                <input id="submit" type="submit" value="{{ post.name }}" >
+            </form>
+
+            <h6>{{ post.date }}</h6>
+            <div class="content-wrapper">
+                {% if post.public_url %}
+                <img src="{{ post.public_url }}" alt="صورة مقال">
+                {% endif %}
+                {% if post.photo_url %}
+                <img src="{{ post.photo_url }}" alt="صورة مقال">
+                {% endif %}
+                <h2>{{ post.title }}</h2>
+                <div>
+                    <p id="paragraph{{ post.id }}" class="paragraph collapsed">{{ post.body }}
+                        
+                    </p>
+                    <a href="javascript:void(0);" id="toggle-link{{ post.id }}" class="toggle-link" data-id="{{ post.id }}">عرض المزيد</a>
+                </div>
+            </div>
+            </section>
+        {% endfor %}
+        {% include 'footer.html' %}
+
+    </main>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="staic/js/click-scroll.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="/static/lien.js"></script>
+</body>
+</html>

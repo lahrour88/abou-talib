@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /login
+Disallow: /post_add
+Allow: /
+
+Sitemap: https://abou-talib.vercel.app/sitemap.xml

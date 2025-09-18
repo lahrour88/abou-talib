@@ -1,0 +1,217 @@
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image:url(https://img.freepik.com/vecteurs-premium/imprime_204950-366.jpg?w=740);
+            padding: 1px;
+            color: #333;
+        }
+        main{
+            position: relative;
+            top: 30px;
+            width: 100%;
+        }
+        .article {
+            direction: rtl;
+            position: relative;
+            top: 30px;
+            margin: 5px auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f6f7f9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e0e3e9;
+        }
+        .article p{
+            
+            width: 97%;
+        }
+        @media (max-width: 768px) {
+            .article {
+                width: 100%;
+                margin: auto;
+            }
+            
+        }
+        @media screen and (max-width: 360px) {
+            .article {
+                width: 100%;
+                margin: auto;
+            }
+        }
+        .article h2 {
+            text-align: center;
+            color: hsl(210, 29%, 24%);
+            margin-bottom: 10px;
+            font-size: 17.5px;
+            font-weight: 60;
+            position: relative;     
+            width: 40%;
+            padding-bottom: 10px;
+            text-decoration: #2980b9;
+        }
+
+        .article form input{
+            background-color: transparent;
+            border: none;
+            color: rgb(0, 119, 255);
+            text-decoration: rgb(83, 83, 223);
+            margin-bottom: 6px;
+        }
+        .article h6 {
+            text-align: center;
+            color: #7196f6;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            z-index: 1;
+            position:absolute;     
+            width: 160px;
+            left: 1px;
+            top: 20px;
+            padding-bottom: 10px;
+            
+        }
+        .article form input submit::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    max-width: 200px;
+    height: 3px;
+    background: linear-gradient(to right, #3498db, rgb(0, 234, 255), #2ecc71);
+    border-radius: 3px;
+}
+
+        
+        .content-wrapper {
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .article img:hover {
+            transform: scale(1.02);
+        }
+        
+        .paragraph {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 17px;
+            text-align: justify;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            white-space: pre-line; /* هذه الخاصية تحافظ على فواصل الأسطر */
+        }
+        
+        .paragraph.collapsed {
+            max-height: 7.4em;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            white-space: pre-line; /* مهم للحفاظ على الأسطر */
+            overflow: hidden;
+        }
+        .col-lg-3{
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            flex: 0 0 25%;
+            max-width: 25%;
+            color: red;
+        }
+        @media screen and (min-width: 768px) {
+            .paragraph.collapsed {
+                max-height: 72em;
+            }
+            
+            
+        }
+        
+        .toggle-link {
+            display: inline-flex;
+            align-items: center;
+            color: #2980b9;
+            text-decoration: none;
+            margin-top: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 00px 00px 30px rgb(128, 164, 181);
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+        
+        .toggle-link:hover {
+            color: #1a5276;
+            background-color: rgba(41, 128, 185, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .toggle-link::before {
+            content: "→";
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-link.expanded::before {
+            transform: rotate(90deg);
+        }
+        
+        
+        
+        @media (min-width: 768px) {
+            .content-wrapper {
+                display: flex;
+                gap: 50px;
+                align-items: flex-start;
+            }
+            
+            .article img {
+                flex: 0 0 45%;
+                margin-bottom: 0;
+                max-width: 45%;
+            }
+            
+            .paragraph {
+                flex: 1;
+                margin-top: 0;
+            }
+            .toggle-link{
+                position: absolute;
+                margin-bottom: 40px;
+                z-index: -111;
+                color: transparent;
+                background-color: transparent;
+                
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .article {
+            animation: fadeIn 0.6s ease-out;
+        }
+        /* From Uiverse.io by alexruix */ 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة منشور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/post-add.css">
+        <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/profile_page1.css">
+    
+</head>
+<body>
+    {%include "appbare.html"%}
+    <br><br>
+    <form id="postForm" action="{{url_for('post_add')}}" method="POST" enctype="multipart/form-data">
+        <div><a href="https://postimages.org/" target="_blank">حول صورة الى رابط</a></div>
+        <div class="sora"><input type="text" name="photo_url" placeholder="رابط الصورة"></div>
+        
+        <div class="file-upload">
+            <button type="button" class="upload-button">
+                <i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #B197FC;"></i>
+                تحميل صورة
+            </button>
+            <input type="file" name="image" id="fileInput" accept="image/*">
+            <span id="fileName">لم يتم اختيار ملف</span>
+        </div>
+        <div><input type="text" name="vedio" placeholder="رابط الفيديو"></div>
+        <label for="title">اضافة منشور </label>
+        <div><input type="text" name="title" placeholder="العنوان" required></div>
+        <div><input type="text" name="topic" placeholder="كلمات مفتاحية لتسيهل البحث "></div>
+        <div><textarea name="body" rows="4" placeholder="اكتب نص ..."></textarea></div>
+        
+        <div>
+            <select name="page" id="page" required>
+                <option value="">اختر وجهة المنشور</option>
+                <option value="sport">sport</option>
+                <option value="takafa">takafa</option>
+                <option value="news">news</option>
+            </select>
+        </div>
+        <a class="home" href="{{url_for('home')}}">الغاء النشر</a>
+        {% if error%}
+            <p>{{error}}</p>
+        {% endif %}
+        <div class="button"><input type="submit" value="نشر"></div>
+    </form>
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="/static/lien.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'لم يتم اختيار ملف';
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+</html>
