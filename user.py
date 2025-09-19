@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 from flask import redirect ,render_template ,url_for ,request ,session
 from supabase import Client ,create_client
 import os ,json , random
-from sender import send_email
+from sender import send_email ,oublier_body
 from dotenv import load_dotenv
 from store import app ,users
 load_dotenv()
@@ -40,11 +40,7 @@ def oublier():
                 code__ = random.randint(100000,999999)
                 session["code__"]=code__
                 session["id"]=user["id"]
-                print(session)
-                with open("emailes/email.html", "r", encoding="utf-8") as file:
-                    body = file.read()
-                    body = body.replace("{{email}}", email)
-                    body = body.replace("{{code}}", str(code__))
+                body=oublier_body(email,code__)
                 subject=f"{code__} هو رمز اعادة تعيين كلمة السر الخاصة بك"
                 send_email(email ,subject , body)
                 return redirect(url_for('code'))
@@ -61,15 +57,10 @@ def user_code():
         return "false"
     else:
         code__=session["code__"]
-    print(code__)
     if request.method == "POST":
         user_code=request.form["code"]
-        print(type(code__) , type(user_code))
         if int(code__)==int(user_code):
-            print(type(code__) , type(user_code))
             session.pop('code__')
-            print(session)
-            print(True)
             return render_template("admin/up.html")
         else:
             return """<div id="result">
@@ -94,16 +85,13 @@ def update():
             return "لا يوجد تطابق "
         else:
             id=int(session["id"])
-            print(id)
             response = (supabase.table("users").update({"password": password}).eq("id", id).execute())
-            print(response)
             session.pop("id")
             return '<script>window.location.href = "/login"</script>'
 def user_verifiede(email ,password):
     datas = get_user_data(table="users" , coloms="*")
     print(datas)
     for user in datas :
-        print(user)
         if user["email"] == email and user["password"] == password :
             session["logged_in"] = True
             session["is_admin"] = user["is_admin"]
@@ -126,7 +114,6 @@ def profile():
     post_data=post_data_()
     data={}
     for user_ in datas :
-        print(user_)
         if user_["name"] == name :
             user={
                 "name":name,
@@ -136,11 +123,14 @@ def profile():
                 }
             for post in post_data:
                 if post["name"] == name:
-                    img=post["public_url"]
-                    post["public_url"]=img_post_url+img
-                    print(post["public_url"])
-                    posts.append(post)
+                    if str(type(post['public_url'])) == "<class 'NoneType'>":
+                        post["public_url"]= None
+                    else:
+                        img= post["public_url"]
+                        post["public_url"]=img_url+img
+                posts.append(post)
             data={"user":user,"post":posts}
+            print(data)
             return render_template("pages/profile.html",datas=data)
     else:
         return "<h4> error reloud uder data </h4>"
@@ -228,14 +218,14 @@ def notes():
         # --------------------------
         math1, math2, math3 = map(lambda x: to_int(request.form.get(x, "0")), ["math1","math2","math3"])
         fr1, fr2, fr3, fr4, fr_n = map(lambda x: to_int(request.form.get(x,"0")), ["fr1","fr2","fr3","fr4","fr-n"])
-        pc1, pc2, pc3, pc_n     = map(lambda x: to_int(request.form.get(x)), ["pc1","pc2","pc3","pc-n"])
-        sp1, sp2, sp_n          = map(lambda x: to_int(request.form.get(x)), ["sp1","sp2","sp-n"])
-        is1, is2, is_n          = map(lambda x: to_int(request.form.get(x)), ["is1","is2","is-n"])
-        ar1, ar2, ar_n          = map(lambda x: to_int(request.form.get(x)), ["ar1","ar2","ar-n"])
-        ig1, ig2, ig_n          = map(lambda x: to_int(request.form.get(x)), ["ig1","ig2","ig-n"])
-        fl1, fl2, fl_n          = map(lambda x: to_int(request.form.get(x)), ["fl1","fl2","fl-n"])
-        svt1, svt2, svt3, svt_n = map(lambda x: to_int(request.form.get(x)), ["svt1","svt2","svt3","svt-n"])
-        en1, en2, en_n     = map(lambda x: to_int(request.form.get(x)), ["en1","en2","en-n"])
+        pc1, pc2, pc3, pc_n     = map(lambda x: to_int(request.form.get(x,"0")), ["pc1","pc2","pc3","pc-n"])
+        sp1, sp2, sp_n          = map(lambda x: to_int(request.form.get(x,"0")), ["sp1","sp2","sp-n"])
+        is1, is2, is_n          = map(lambda x: to_int(request.form.get(x,"0")), ["is1","is2","is-n"])
+        ar1, ar2, ar_n          = map(lambda x: to_int(request.form.get(x,"0")), ["ar1","ar2","ar-n"])
+        ig1, ig2, ig_n          = map(lambda x: to_int(request.form.get(x,"0")), ["ig1","ig2","ig-n"])
+        fl1, fl2, fl_n          = map(lambda x: to_int(request.form.get(x,"0")), ["fl1","fl2","fl-n"])
+        svt1, svt2, svt3, svt_n = map(lambda x: to_int(request.form.get(x,"0")), ["svt1","svt2","svt3","svt-n"])
+        en1, en2, en_n     = map(lambda x: to_int(request.form.get(x,"0")), ["en1","en2","en-n"])
         # --------------------------
         #  Calcul des moyennes pondérées
         # --------------------------
@@ -274,5 +264,4 @@ def notes():
 
 @app.route("/note", methods=["POST", "GET"])
 def note():
-    print("hello")
     return render_template("pages/note.html")

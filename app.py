@@ -3,12 +3,11 @@ from store import Post,app
 from supabase import create_client, Client
 import os ,uuid 
 import ai_chat
-from sender import send_email
+from sender import send_email ,contact_body ,post_add_body
 from datetime import date
 from dotenv import load_dotenv
 from user import user_verifiede ,get_user_data
 from datetime import timedelta 
-
 load_dotenv()
 app.secret_key = os.getenv("secret_key")
 app.permanent_session_lifetime = timedelta(days =10000)
@@ -29,20 +28,32 @@ def home():
     data=load_posts()
     for post in data :
         if post["page"] == "sport":
-            img=post["public_url"]
-            post["public_url"]=img_url+img
+            print("and ",type(post["public_url"]))
+            if str(type(post['public_url'])) == "<class 'NoneType'>":
+                post["public_url"]= ""
+            else:
+                img= post["public_url"]
+                post["public_url"]=img_url+img
             print(post["public_url"])
             global sport_post
             sport_post.append(post)
         elif post["page"] == "takafa":
-            img=post["public_url"]
-            post["public_url"]=img_url+img
+            print("and ",type(post["public_url"]))
+            if str(type(post['public_url'])) == "<class 'NoneType'>":
+                post["public_url"]= ""
+            else:
+                img= post["public_url"]
+                post["public_url"]=img_url+img
             print(post["public_url"])
             global takafa_post
             takafa_post.append(post)
         elif post["page"] == "naws":
-            img=post["public_url"]
-            post["public_url"]=img_url+img
+            print("and ",type(post["public_url"]))
+            if str(type(post['public_url'])) == "<class 'NoneType'>":
+                post["public_url"]= ""
+            else:
+                img= post["public_url"]
+                post["public_url"]=img_url+img
             print(post["public_url"])
             global news_post
             news_post.append(post)
@@ -95,14 +106,7 @@ def contact():
             message = request.form['message']
             subject=request.form.get("subject")
             classe = request.form['class']
-            with open("emailes/students.html", "r", encoding="utf-8") as file:
-                    body = file.read()
-                    body = body.replace("{{email}}", email)
-                    body = body.replace("{{name}}", name)
-                    body = body.replace("{{message}}", message)
-                    body = body.replace("{{class}}", classe)
-                    body = body.replace("{{subject}}", subject)
-
+            body=contact_body(email,name,message,classe,subject)
             send_email(admin ,subject,body)
             return redirect(request.referrer)
     except Exception as e:
@@ -149,7 +153,8 @@ def post_add():
                 # تحميل الملف مباشرةإلى Supabase Storage
                 file_content = file.read()
                 upload_response = supabase.storage.from_("images").upload(new_filename, file_content)
-            # إنشاء المنشور الجديد
+            else:
+                new_filename=None
             selected_page = request.form['page']
             new_post = Post(
                 public_url=new_filename,  
@@ -159,7 +164,7 @@ def post_add():
                 name=session["name"],
                 topic=request.form['topic'],
                 page=selected_page,
-                date=date.today()  # تعيين التاريخ الحالي بدون الوقت
+                date=date.today()  
             )
             # حفظ البيانات في Supabase
             data = {
@@ -174,17 +179,16 @@ def post_add():
             }
             supabase.table('lahrour').insert(data).execute()
             users=get_user_data(table="emails",coloms="email")
-            print(users)
-            subject="new post"
-            body={
-                "hghhg":"hello test"
-            }
-            for user in users:
-                send_email(user["email"],subject , body)
-            return redirect(url_for(selected_page))
+            body_excerpt = (data["body"][:150] + " ...") if len(data["body"]) > 150 else data["body"]
+            data["body_excerpt"] = body_excerpt 
+
+            body=post_add_body(data['photo_url'],data["body_excerpt"],data["date"],data['title'],data["public_url"],data["topic"],data["name"])
+            for  user in users:
+                send_email(user['email'], subject=f"📢 منشور جديد: {data['title']}", body=body)
+
     except Exception as e :
         print('ereur',e)
     return render_template('admin/post-add.html',error=error)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

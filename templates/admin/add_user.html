@@ -4,8 +4,19 @@
   <meta charset="UTF-8">
   <title>إضافة مستخدم جديد</title>
   <link rel="stylesheet" href="/static/css/post-add.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/post-add.css">
+        <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/profile_page1.css">
 </head>
 <body>
+  {%include "appbare.html"%}
+  <br><br>
   {%if response %}
   <h1>response</h1>
   {%endif %}
@@ -45,5 +56,9 @@
       <input type="submit" value="إضافة المستخدم">
     </div>
   </form>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
 </body>
 </html>
