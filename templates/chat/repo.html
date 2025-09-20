@@ -22,4 +22,9 @@
     <h2>مرحباً، كيف يمكنني مساعدتك اليوم؟</h2>
     <p style="margin-top: 15px; font-size: 14px;">يمكنني الإجابة على أسئلتك، المساعدة في الكتابة، توليد الأفكار والمزيد</p>
   </div>
-    {% endif %}
+{% endif %}
+
+
+
+
+        <form hx-post="/chat" hx-target="#chat-container" hx-swap="beforeend" hx-on::after-request="if(event.detail.successful) this.reset()"></form>

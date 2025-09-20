@@ -28,7 +28,6 @@ def home():
     data=load_posts()
     for post in data :
         if post["page"] == "sport":
-            print("and ",type(post["public_url"]))
             if str(type(post['public_url'])) == "<class 'NoneType'>":
                 post["public_url"]= ""
             else:
@@ -191,4 +190,4 @@ def post_add():
     return render_template('admin/post-add.html',error=error)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True ,host="0.0.0.0")

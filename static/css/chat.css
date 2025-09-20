@@ -56,7 +56,7 @@ pre code {
     .main-container{
         width: 100%;
       margin: auto;
-        padding-top: 13px;
+      padding-top:30px ;
     }
     body {
         direction: ltr;
@@ -191,8 +191,8 @@ pre code {
     }
 
     .avatar {
-      width: 30px;
-      height: 30px;
+      width: 50px;
+      height: 50px;
       border-radius: 4px;
       margin-left: 15px;
       display: flex;
@@ -249,6 +249,7 @@ pre code {
       font-size: 16px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       transition: border-color 0.3s;
+      height:58px;
     }
 
     textarea:focus {
@@ -302,6 +303,9 @@ pre code {
     @media (max-width: 768px) {
       .sidebar {
         display: none;
+      }
+      #chat-container {
+        padding: 5%;
       }
       .main-container{
         height: 90%;

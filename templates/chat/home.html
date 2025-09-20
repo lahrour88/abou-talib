@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChatGPT - نسخة بالعربية</title>
+  <title>abou-talib.ai</title>
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <link rel="stylesheet" href="/static/css/chat.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Highlight.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
-  <!--css style-->
-    <link rel="stylesheet" href="/static/css/chat.css">
-    <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
-    <link rel="stylesheet" href="static/css/index.css">
-    <link rel="stylesheet" href="/static/css/profile_page1.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
 </head>
 <body>
- {% include "appbare.html" %}
+  {%include "appbare.html" %}
   <div class="main-container">
     <div class="chat-header">
-      abou-talib.AI
+      ABOU-TALIB.AI
     </div>
     
     <div id="chat-container">
@@ -49,29 +49,24 @@
 {% else %}
   <div style="text-align: center; padding: 40px 0; color: var(--text-secondary);">
     <h2>مرحباً، كيف يمكنني مساعدتك اليوم؟</h2>
-    <p style="margin-top: 15px; font-size: 14px;">يمكنني الإجابة على أسئلتك التي   تتعلق بالنؤسسة التعليمية لكنني قد اتاخر في الرد </p>
   </div>
     {% endif %}
     </div>
     <div class="input-container">
       <div class="input-box">
         <form hx-post="/chat" hx-target="#chat-container" hx-on::after-request="this.reset()">
-                    <textarea name="message" id="message" cols="30" rows="1" placeholder="اكتب رسالتك هنا..." autocomplete="off" required></textarea>
+          <textarea name="message" id="message" cols="30" rows="2" placeholder="اكتب رسالتك هنا..." autocomplete="off" required></textarea>
           <button type="submit" class="send-button">
             <i class="fas fa-paper-plane"></i>
           </button>
         </form>
       </div>
       <div class="disclaimer">
-        abou-talib.AI يمكن أن يقدم أحياناً معلومات خاطئة. يرجى التحقق من المعلومات المهمة.
+        abou-talib.ai يمكن أن يقدم أحياناً معلومات خاطئة. يرجى التحقق من المعلومات المهمة
       </div>
     </div>
   </div>
-  <script src="static/js/bootstrap.bundle.min.js"></script>
-    <script src="staic/js/click-scroll.js"></script>
-    <script src="static/js/custom.js"></script>
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/jquery.sticky.js"></script>
+</div>
   <script>
     // جعل التركيز على حقل الإدخال عند التحميل
     document.addEventListener('DOMContentLoaded', function() {
@@ -96,5 +91,10 @@
       }
     });
   </script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="/static/lien.js"></script>
 </body>
 </html>

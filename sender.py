@@ -80,6 +80,9 @@ def contact_body(email,name,message,classe,subject):
     return body
 
 def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
+    if str(type(public_url)) != "<class 'NoneType'>":
+      img_name=photo_url
+      photo_url=f"https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//{img_name}"
     return render_template_string("""
 <!DOCTYPE html>
 <html lang="ar">
@@ -120,9 +123,6 @@ def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
         <img src="{{public_url}}" alt="صورة المنشور" style="max-width:90%; border-radius:8px;">
       </div>
       {%endif%}
-
-      <!-- عنوان المنشور -->
-      <h3 style="margin:10px 0; font-size:16px; color:#222;">{title}</h3>
 
       <!-- نص قصير -->
       <p style="font-size:14px; line-height:1.6; color:#555;">

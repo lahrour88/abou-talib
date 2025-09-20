@@ -18,10 +18,10 @@
             <h1>تسجيل الدخول</h1>
             <p>الرجاء إدخال بياناتك  للتاكد من هويتك</p>
         
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        <form method="post" action="/login">
+            <form method="post" action="/login">
+            {% if error %}
+                <p id="error" class="error">{{ error }}</p>
+            {% endif %}
             <div class="form-group name">
                 <label for="username">اسم المستخدم</label>
                 <input class="form-control" type="email" name="email" id="username" required placeholder="أدخل بريدك الإلكتروني">

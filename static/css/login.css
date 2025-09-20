@@ -175,9 +175,12 @@
         #email form{
             width: 100%;
         }
-        #span{
+        .error{
             margin: auto;
             padding: 4px;
             color: red;
         }
-        
+        #error{
+            color: red;
+            font-size: 15px;
+        }

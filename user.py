@@ -141,7 +141,6 @@ def add_user():
         return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
     if not session.get("is_admin"):
         return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
-
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
