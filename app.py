@@ -33,27 +33,23 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            print(post["public_url"])
+            print
             global sport_post
             sport_post.append(post)
         elif post["page"] == "takafa":
-            print("and ",type(post["public_url"]))
             if str(type(post['public_url'])) == "<class 'NoneType'>":
                 post["public_url"]= ""
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            print(post["public_url"])
             global takafa_post
             takafa_post.append(post)
-        elif post["page"] == "naws":
-            print("and ",type(post["public_url"]))
+        elif post["page"] == "news":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
                 post["public_url"]= ""
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            print(post["public_url"])
             global news_post
             news_post.append(post)
 
@@ -65,7 +61,6 @@ def subscribe():
     if email:
         data = {"email": email}
         response = supabase.table("emails").insert(data).execute()
-        print(response.data)
     return redirect(request.referrer)
 @app.route('/sw.js')
 def service_worker():
@@ -132,7 +127,6 @@ def login():
 def post_add():
     try:
         error = None
-        print(f"Session logged_in: {session.get('logged_in')}")  # تتبع حالة الجلسة
         if not session.get('logged_in'):
             return redirect(url_for('login'))
         public_url = None
@@ -142,7 +136,6 @@ def post_add():
             if file:
                 file.seek(0, os.SEEK_END)
                 file_length = file.tell()
-                print("file_length", file_length)
                 file.seek(0, 0)
                 if file_length > 2000 * 1024:  # 500 كيلوبايت
                     error = "حجم الملف كبير جداً. يجب أن يكون أقل من 1000 كيلوبايت."
@@ -184,10 +177,11 @@ def post_add():
             body=post_add_body(data['photo_url'],data["body_excerpt"],data["date"],data['title'],data["public_url"],data["topic"],data["name"])
             for  user in users:
                 send_email(user['email'], subject=f"📢 منشور جديد: {data['title']}", body=body)
+                print(user["email"])
 
     except Exception as e :
         print('ereur',e)
     return render_template('admin/post-add.html',error=error)
 
 if __name__ == '__main__':
-    app.run(debug=True ,host="0.0.0.0")
+    app.run(debug=False)

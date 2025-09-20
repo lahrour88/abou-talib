@@ -127,9 +127,11 @@ def profile():
                         post["public_url"]= None
                     else:
                         img= post["public_url"]
-                        post["public_url"]=img_url+img
+                        post["public_url"]=img_post_url+img
+                        print(post['public_url'])
                 posts.append(post)
             data={"user":user,"post":posts}
+            print(data["post"])
             print(data)
             return render_template("pages/profile.html",datas=data)
     else:

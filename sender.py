@@ -80,10 +80,13 @@ def contact_body(email,name,message,classe,subject):
     return body
 
 def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
-    if str(type(public_url)) != "<class 'NoneType'>":
-      img_name=photo_url
-      photo_url=f"https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//{img_name}"
-    return render_template_string("""
+    if str(type(public_url)) == "<class 'NoneType'>":
+        img_url=photo_url
+    else:
+        img_name=photo_url
+        img_url=f"https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//{img_name}"
+
+    return f"""
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -108,25 +111,16 @@ def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
       <h2 style="color:#0645AD; font-size:18px;">📢 إعلان عن منشور جديد</h2>
       
       <p style="font-size:15px; margin-top:10px;">
-        قام <strong style="color:blue;">{{name}}</strong> بنشر مقال جديد بتاريخ <strong>{{date}}</strong>  
-        ضمن موضوع: <strong>{{topic}}</strong>.
+        قام <strong style="color:blue;">{name}</strong> بنشر مقال جديد بتاريخ <strong>{date}</strong>  
+        ضمن موضوع: <strong>{topic}</strong>.
       </p>
 
       <!-- صورة المنشور -->
-       {%if photo_url %}
       <div style="text-align:center; margin:20px 0;">
-        <img src="{{photo_url}}" alt="صورة المنشور" style="max-width:90%; border-radius:8px;">
-       {%endif%}
-       {%if public_url %}
-      </div>
-      <div style="text-align:center; margin:20px 0;">
-        <img src="{{public_url}}" alt="صورة المنشور" style="max-width:90%; border-radius:8px;">
-      </div>
-      {%endif%}
-
+        <img src="{img_url}" alt="صورة المنشور" style="max-width:90%; border-radius:8px;">
       <!-- نص قصير -->
       <p style="font-size:14px; line-height:1.6; color:#555;">
-        {{body_excerpt}}...
+        {body_excerpt}...
       </p>
 
       <!-- زر عرض المزيد -->
@@ -150,9 +144,7 @@ def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
   </div>
 </body>
 </html>
-""", photo_url=photo_url, body_excerpt=body_excerpt, date=date, 
-         title=title, public_url=public_url, topic=topic, name=name) 
-
+"""
 def oublier_body(email,code__):
     body=f"""
 <!DOCTYPE html>
