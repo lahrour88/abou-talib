@@ -96,3 +96,86 @@ http://localhost:5000
 ## 🔗 روابط الموقع على vercel
 [abou-talib.vercel.app](https://abou-talib.vercel.app)  
 
+## 🗂️ المخططات التوضيحية
+
+### 🔐 تدفق تسجيل الدخول
+```mermaid
+sequenceDiagram
+    participant User as 👨‍🎓 مستخدم
+    participant FE as 💻 واجهة المستخدم (Frontend)
+    participant BE as ⚙️ خادم Flask
+    participant DB as 🗄️ قاعدة بيانات Supabase
+
+    User->>FE: يدخل البريد وكلمة المرور
+    FE->>BE: إرسال بيانات تسجيل الدخول
+    BE->>DB: التحقق من الحساب
+    DB-->>BE: نتيجة التحقق (نجاح / فشل)
+    alt نجاح
+        BE-->>FE: إنشاء Session وإرجاع Dashboard
+        FE-->>User: عرض لوحة التحكم
+    else فشل
+        BE-->>FE: رسالة خطأ
+        FE-->>User: عرض إشعار فشل الدخول
+    end
+graph TD
+    subgraph Client [💻 الواجهة الأمامية]
+        A[👨‍🏫 أستاذ]
+        B[👨‍🎓 تلميذ]
+        C[🏫 إدارة]
+    end
+
+    subgraph Backend [⚙️ Flask Backend]
+        R[app.py - Routes]
+        U[user.py]
+        S[store.py]
+        N[sender.py]
+        AI[ai_chat.py]
+    end
+
+    subgraph DB [🗄️ Supabase]
+        D[(Users)]
+        P[(Posts)]
+        G[(Grades)]
+    end
+
+    A --> R
+    B --> R
+    C --> R
+
+    R --> U
+    R --> S
+    R --> N
+    R --> AI
+
+    U --> D
+    S --> P
+    AI --> D
+    AI --> G
+
+erDiagram
+    USERS ||--o{ POSTS : "ينشئ"
+    USERS ||--o{ GRADES : "يحصل"
+    TEACHERS ||--o{ POSTS : "يكتب"
+    STUDENTS ||--o{ GRADES : "يمتلك"
+
+    USERS {
+        int id PK
+        string name
+        string email
+        string role
+    }
+
+    POSTS {
+        int id PK
+        string title
+        string body
+        int user_id FK
+    }
+
+    GRADES {
+        int id PK
+        int student_id FK
+        int value
+        string subject
+    }
+
