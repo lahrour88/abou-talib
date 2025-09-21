@@ -39,6 +39,7 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
+            print(post,"\n")
             sport_post.append(post)
         elif post["page"] == "takafa":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
@@ -46,6 +47,7 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
+            print(post,"\n")
             takafa_post.append(post)
         elif post["page"] == "news":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
@@ -53,6 +55,7 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
+            print(post,"\n")
             news_post.append(post)
 
     return render_template('pages/index.html')
@@ -73,6 +76,7 @@ def robots():
 @app.route('/takafa',methods=['POST',"GET"])
 def takafa():
     global takafa_post
+    print(takafa_post)
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))
@@ -80,6 +84,7 @@ def takafa():
 @app.route('/sport',methods=["POST","GET"])
 def sport():
     global sport_post
+    print(sport_post)
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))
@@ -87,6 +92,7 @@ def sport():
 @app.route('/news',methods=['POST',"GET"])
 def news():
     global news_post
+    print(news_post)
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))

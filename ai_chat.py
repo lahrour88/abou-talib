@@ -15,24 +15,50 @@ def chat():
     senders=[]
     session["senders"]=senders
     return render_template('chat/chat.html')
+
 def eq_topic(message):
-    message=message.lower()
+    message = message.lower()
     response = supabase.table("lahrour").select("body", "topic").execute()
-    topics = response.data
+    topics = response.data 
     words = message.split()  
+    
     best_match = None
     best_score = 0
+
     for topic in topics:
-        score_full = fuzz.partial_ratio(message, topic["topic"])
-        score_words = max(fuzz.partial_ratio(word, topic["topic"]) for word in words)
-        score = int(0.7 * score_words + 0.3 * score_full)
-        if score > best_score:
-            best_score = score
-            best_match = topic
+        # تقسيم الاحتمالات بعلامة # أو //
+        possible_questions = topic["topic"].replace("//", "#").split("#")
+
+        for question in possible_questions:
+            question = question.strip().lower()
+            if not question:
+                continue
+
+            score_full = fuzz.partial_ratio(message, question)
+            score_words = max(fuzz.partial_ratio(word, question) for word in words)
+            score = int(0.7 * score_words + 0.3 * score_full)
+
+            if score > best_score:
+                best_score = score
+                best_match = topic
+
     if best_score > 70:
         print(f"🔍 Debug: أفضل تطابق بنسبة {best_score}%")
         return best_match["body"]
+
     return False
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route("/chat", methods=["POST", "GET"])
 def main():
     senders=session["senders"]
