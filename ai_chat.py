@@ -14,12 +14,7 @@ chat_session = None
 def chat():
     senders=[]
     session["senders"]=senders
-    global chat_session
-    genai.configure(api_key=os.getenv("api_key"))
-    model = genai.GenerativeModel('gemini-2.5-flash')
-    chat_session = model.start_chat(history=[])
-    return render_template("chat/home.html")
-
+    return render_template('chat/chat.html')
 def eq_topic(message):
     message=message.lower()
     response = supabase.table("lahrour").select("body", "topic").execute()
@@ -41,17 +36,18 @@ def eq_topic(message):
 @app.route("/chat", methods=["POST", "GET"])
 def main():
     senders=session["senders"]
-    global chat_session
+    genai.configure(api_key=os.getenv("api_key"))
+    model = genai.GenerativeModel('gemini-2.5-flash')
     if request.method == "POST":
         message = request.form.get("message", "none")
         senders.append({"role": "user", "content": message})
         topic = eq_topic(message)
-        if topic != False:  # فقط إذا وجد تطابق مناسب
+        if topic != False:
             promt = f"""أنت مدير مدرسة، دورك هو الإجابة بشكل رسمي ودقيق عن سؤال التلميذ التالي:{message}"اعتمد حصرياً على المعطيات التالية: {topic}يجب أن تكون الإجابة واضحة، مختصرة وموجهة للتلميذ، دون أي بحث خارجي أو إضافة معلومات غير موجودة في البيانات."""
             genai.configure(api_key=os.getenv("api_key"))
             model = genai.GenerativeModel('gemini-2.5-flash')
             chat = model.start_chat()
-            response = chat_session.send_message(promt)
+            response = chat.send_message(promt)
             response_text = response.text
             html_response = markdown.markdown(response_text, extensions=["fenced_code", "tables"])
             senders.append({"role": "ai", "content": html_response})

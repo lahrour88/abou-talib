@@ -23,7 +23,7 @@ def send_email(user , subject , body):
     except Exception as e:
         print(f"Error: {e}")
 
-def contact_body(email,name,message,classe,subject):
+def contact_body(name,message,classe,subject):
     body=f"""
 <!DOCTYPE html>
 <html lang="ar">
@@ -80,10 +80,10 @@ def contact_body(email,name,message,classe,subject):
     return body
 
 def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
-    if str(type(public_url)) == "<class 'NoneType'>":
+    if public_url == None:
         img_url=photo_url
     else:
-        img_name=photo_url
+        img_name=public_url
         img_url=f"https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//{img_name}"
 
     return f"""

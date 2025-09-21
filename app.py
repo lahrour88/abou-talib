@@ -25,7 +25,13 @@ def load_posts():
 def home():
     img_url="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//"
     session.permanent = True
+    global sport_post
     data=load_posts()
+    global takafa_post
+    sport_post.clear()
+    takafa_post.clear()
+    global news_post
+    news_post.clear()
     for post in data :
         if post["page"] == "sport":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
@@ -33,8 +39,6 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            print
-            global sport_post
             sport_post.append(post)
         elif post["page"] == "takafa":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
@@ -42,7 +46,6 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            global takafa_post
             takafa_post.append(post)
         elif post["page"] == "news":
             if str(type(post['public_url'])) == "<class 'NoneType'>":
@@ -50,7 +53,6 @@ def home():
             else:
                 img= post["public_url"]
                 post["public_url"]=img_url+img
-            global news_post
             news_post.append(post)
 
     return render_template('pages/index.html')
