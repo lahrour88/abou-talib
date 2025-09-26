@@ -6,3 +6,4 @@ markdown
 rapidfuzz
 python-dotenv
 werkzeug
+pillow
