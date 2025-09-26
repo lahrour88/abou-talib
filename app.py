@@ -20,45 +20,21 @@ app.permanent_session_lifetime = timedelta(days =900)
 url = os.getenv('url')
 key = os.getenv('key')
 img_url=os.getenv('posts_url')
-sport_post=[]
-takafa_post=[]
-news_post=[]
 supabase: Client = create_client(url, key)
-def load_posts():
-    response = supabase.table('lahrour').select('*').execute()
-    return response.data
+def load_posts(page_name):
+    response = (supabase.table("lahrour").select("*").eq("page",page_name).execute())
+    data=[]
+    for post in response.data:
+        for img in ["img1", "img2", "img3", "img4"] :
+            value= post.get(img)
+            if value is not None:
+                post[f"{img}_name"]=post[img]
+                post[img] = img_url + value
+        data.append(post)
+    return data
 @app.route('/')
 def home():
     session.permanent = True
-    global sport_post
-    data=load_posts()
-    global takafa_post
-    sport_post.clear()
-    takafa_post.clear()
-    global news_post
-    news_post.clear()
-    for post in data :
-        if post["page"] == "sport":
-            for img in ["img1", "img2", "img3", "img4"] :
-                value= post.get(img)
-                print(value,"and data type is ",type(value))
-                if value is not None:
-                    post[img] = img_url + value
-            sport_post.append(post)
-        elif post["page"] == "takafa":
-            for img in ["img1", "img2", "img3", "img4"] :
-                value= post.get(img)
-                print(value,"and data type is ",type(value))
-                if value is not None:
-                    post[img] = img_url + value
-            takafa_post.append(post)
-        elif post["page"] == "news":
-            for img in ["img1", "img2", "img3", "img4"] :
-                value= post.get(img)
-                print(value,"and data type is ",type(value))
-                if value is not None:
-                    post[img] = img_url + value
-            news_post.append(post)
     return render_template('pages/index.html')
 
 @app.route("/message", methods=["POST"])
@@ -67,6 +43,7 @@ def subscribe():
     if email:
         data = {"email": email}
         response = supabase.table("emails").insert(data).execute()
+        print("Subscription response:", response)
     return redirect(request.referrer)
 @app.route('/sw.js')
 def service_worker():
@@ -76,28 +53,25 @@ def robots():
     return send_from_directory(app.static_folder, 'robots.txt')
 @app.route('/takafa',methods=['POST',"GET"])
 def takafa():
-    global takafa_post
-    print(takafa_post)
+    data=load_posts("takafa")
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))
-    return render_template('pages/takafa.html', posts=takafa_post[::-1])
+    return render_template('pages/takafa.html', posts=data[::-1])
 @app.route('/sport',methods=["POST","GET"])
 def sport():
-    global sport_post
-    print(sport_post)
+    data=load_posts("sport")
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))
-    return render_template('pages/sport.html', posts=sport_post[::-1])
+    return render_template('pages/sport.html', posts=data[::-1])
 @app.route('/news',methods=['POST',"GET"])
 def news():
-    global news_post
-    print(news_post)
+    data=load_posts("news")
     if request.method == "POST":
         name=request.form.get("name")
         return redirect(url_for("profile",name=name))
-    return render_template('pages/news.html', posts=news_post[::-1])
+    return render_template('pages/news.html', posts=data[::-1])
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     try:

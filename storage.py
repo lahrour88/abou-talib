@@ -2,19 +2,21 @@ from supabase import create_client, Client
 import os 
 from dotenv import load_dotenv
 load_dotenv()
-from user import post_data_
+from user import post_data_storage
 url: str = os.getenv('url')
 key: str = os.getenv('key')
 supabase: Client = create_client(url, key)
 
 def delet_posts():
     try:
-        data=post_data_()[-1:]
+        data=post_data_storage()
         for img in ["img1","img2","img3","img4"]:
-            to_delete= data[0][img]
+            to_delete= data[img]
             if to_delete is not None:
-                response = supabase.storage.from_("images").remove([f"posts/{data[0][img]}"])
-        response = supabase.table("lahrour").delete().eq("id",data[0]["id"]).execute()
+                response = supabase.storage.from_("images").remove([f"posts/{data[img]}"])
+                print("delete image\n\n\n ",response)
+        response = supabase.table("lahrour").delete().eq("id",data["id"]).execute()
+        print("\ndelete post \n",response)
         return True
     except Exception as e:
         print("Error deleting posts:", e)

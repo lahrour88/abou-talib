@@ -107,16 +107,18 @@ def user_verifiede(email ,password):
     else:
         print("not found ")
         return False
-def post_data_():
-    response=supabase.table("lahrour").select('*').execute()
+def post_data_(name):
+    response=(supabase.table("lahrour").select('*').eq("name",name).execute())
     return response.data
-
+def post_data_storage():
+    response = (supabase.table("lahrour").select("*").order("id", desc=False).limit(1).single().execute())
+    return response.data
 @app.route("/profile",methods=["POST","GET"])
 def profile():
     name =request.args.get("name")
     posts=[]
     datas=get_user_data(table="users",coloms="*")
-    post_data=post_data_()
+    post_data=post_data_(name)
     data={}
     img=None
     for user_ in datas :
@@ -133,14 +135,13 @@ def profile():
                 if post["name"] == name:
                     for img in ["img1", "img2", "img3", "img4"] :
                         value= post.get(img)
-                        print(value,"and data type is ",type(value))
                         if value is not None:
-                            print(f"{img} : {value} : '{type(value)}'")
                             post[f"{img}_name"]=post[img]
                             post[img] = img_post_url + value
-                            posts.append(post)
+                    posts.append(post)
             data={"user":user,"post":posts[::-1]}
-            
+            for p in data['post']:
+                print(p,"\n")
             return render_template("pages/profile.html",datas=data) 
     else:
         return "<h4> error reloud uder data </h4>"
