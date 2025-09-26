@@ -1,5 +1,4 @@
-
-        *{
+*{
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -119,7 +118,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
-            white-space: pre-line; /* هذه الخاصية تحافظ على فواصل الأسطر */
+            white-space: pre-line; 
         }
         
         .paragraph.collapsed {
@@ -127,7 +126,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             text-overflow: ellipsis;
-            white-space: pre-line; /* مهم للحفاظ على الأسطر */
+            white-space: pre-line; 
             overflow: hidden;
         }
         .col-lg-3{
@@ -206,12 +205,71 @@
             }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .article {
+                animation: fadeIn 0.6s ease-out;
+            }
+            /* From Uiverse.io by alexruix */
+            .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+                }
+
+            .swiper-slide img {
+                max-width: 100%;
+                height: auto;   /* يتكيف مع أبعاد الصورة */
+                object-fit: contain;
+            }
+
+            .swiper-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: #fff;
+                background: rgba(0,0,0,0.3);
+                border-radius: 4px;
+            }
+
+            .swiper-button-next:after,
+            .swiper-button-prev:after {
+                font-size: 15px;
+            }
+
+            .swiper-pagination-bullet {
+                background: #fff;
+                opacity: 0.7;
+            }
+
+            .swiper-pagination-bullet-active {
+                background: #2980b9;
+            }
+
+            /* نهاية الكود من Uiverse.io */ 
+            @media (max-width: 768px) {
+        .swiper-button-next,
+        .swiper-button-prev {
+            display: none !important;
         }
-        
-        .article {
-            animation: fadeIn 0.6s ease-out;
         }
-        /* From Uiverse.io by alexruix */ 
+#title {
+        text-align: right;
+        margin: 20px 0;
+        font-size: 32px;
+        font-weight: bold;
+        color: #25435fad;
+        text-decoration-line: underline;
+        text-decoration-color: #25435fad;
+        text-decoration-style: dashed;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 2px;
+      }
+

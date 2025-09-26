@@ -2,7 +2,7 @@
 from werkzeug.utils import secure_filename
 from flask import redirect ,render_template ,url_for ,request ,session
 from supabase import Client ,create_client
-import os ,json , random
+import os ,json , random ,time
 from sender import send_email ,oublier_body
 from dotenv import load_dotenv
 from store import app ,users
@@ -10,20 +10,28 @@ load_dotenv()
 url = os.getenv('url')
 key = os.getenv('key')
 supabase: Client = create_client(url, key)
+img_post_url=os.getenv('posts_url')
+img_profile_url=os.getenv('profile_url')
 def get_user_data(table,coloms):
     response = supabase.table(table).select(coloms).execute()
     return response.data
 
+
+
 @app.route('/delet',methods=['POST',"GET"])
 def delet():
+    debut=float(time.time())
     if request.method == "POST":
         post_id=request.form.get("post_id")
-        if post_id : 
-            print(type(post_id))
-            post_id=int(post_id)
-            response = (supabase.table("lahrour").delete().eq("id",post_id).execute())
-            resule ="تم حدف المنشور بنجاح"
-    return f"<h6>{resule}</h6>"
+        img_name=[request.form.get("img1"),request.form.get("img2"),request.form.get("img3"),request.form.get("img4")]
+        for img in img_name:
+            if img != None:
+                response = (supabase.storage.from_("images").remove([f"posts/{img}"]))
+                print(response)
+        
+        response = (supabase.table("lahrour").delete().eq("id",post_id).execute())
+        resule ="تم حدف المنشور بنجاح"
+    return f"<h6>{resule ,(float(time.time()))-debut}</h6>"
 @app.route("/del",methods=["POST","GET"])
 def log_out():
     session.clear()
@@ -37,7 +45,7 @@ def oublier():
         users = get_user_data(table="users",coloms="id,email")
         for user in users:
             if user['email'] == email:
-                code__ = random.randint(100000,999999)
+                code__ = random.randint(10000000,99999999)
                 session["code__"]=code__
                 session["id"]=user["id"]
                 body=oublier_body(email,code__)
@@ -103,8 +111,6 @@ def post_data_():
     response=supabase.table("lahrour").select('*').execute()
     return response.data
 
-img_url="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/profile/profile/"
-img_post_url="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//"
 @app.route("/profile",methods=["POST","GET"])
 def profile():
     name =request.args.get("name")
@@ -112,24 +118,25 @@ def profile():
     datas=get_user_data(table="users",coloms="*")
     post_data=post_data_()
     data={}
+    img=None
     for user_ in datas :
         if user_["name"] == name :
             user={
                 "name":name,
-                "profile":f"{img_url}{user_["profile_filename"]}",
+                "profile":f"{img_profile_url}{user_["profile_filename"]}",
                 "email":user_['email'],
                 "matier":user_["matier"]
                 }
             for post in post_data:
                 if post["name"] == name:
-                    if str(type(post['public_url'])) == "<class 'NoneType'>":
-                        post["public_url"]= None
-                    else:
-                        img= post["public_url"]
-                        post["public_url"]=img_post_url+img
-                posts.append(post)
+                    for img in ["img1", "img2", "img3", "img4"] :
+                        post[f"{img}_name"]=post[img]
+                        if post.get(img):
+                            post[img] =img_post_url+post[img]
+                    posts.append(post)
             data={"user":user,"post":posts[::-1]}
-            return render_template("pages/profile.html",datas=data)
+            
+            return render_template("pages/profile.html",datas=data) 
     else:
         return "<h4> error reloud uder data </h4>"
 
@@ -152,14 +159,15 @@ def add_user():
             
             # نجيب الامتداد الأصلي (png/jpg/jpeg)
             ext = os.path.splitext(profile_file.filename)[1].lower()
-            if ext not in [".png", ".jpg", ".jpeg"]:
-                return "صيغة الصورة غير مدعومة"
+            exts=[".png", ".jpg", ".jpeg"]
+            if ext not in exts:
+                return f"صيغة الملف غيد مدعومة من الافضل حولها اوى {exts}"
             # اسم الملف يكون username + الامتداد
             safe_name = secure_filename(name)  
             filename = f"{safe_name}{ext}"
             path = f"profile/{filename}"
             file_bytes = profile_file.read()
-            response = supabase.storage.from_("profile").upload(
+            response = supabase.storage.from_("images").upload(
             path=path,
             file=file_bytes,
             file_options={"cache-control": "3600", "upsert": "true"})
@@ -176,7 +184,7 @@ def add_user():
         }
 
         response = supabase.table("users").insert(user).execute()
-        return redirect(url_for("add_user", response=response))
+        return f"نجاح {response}"
 
     return render_template("admin/add_user.html")
 

@@ -23,7 +23,7 @@ def send_email(user , subject , body):
     except Exception as e:
         print(f"Error: {e}")
 
-def contact_body(name,message,classe,subject):
+def contact_body(email,name,message,classe,subject):
     body=f"""
 <!DOCTYPE html>
 <html lang="ar">
@@ -51,6 +51,7 @@ def contact_body(name,message,classe,subject):
       <p style="font-size:15px;">
         توصلتم برسالة جديدة من <strong style="color:blue;">{name}</strong>  
         (القسم: <strong>{classe}</strong>).
+        <p>البريد الإلكتروني: <strong style="color:blue;">{email}</strong>
       </p>
 
       <p style="margin:20px 0; font-size:14px; line-height:1.6;">
@@ -79,12 +80,7 @@ def contact_body(name,message,classe,subject):
 """
     return body
 
-def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
-    if public_url == None:
-        img_url=photo_url
-    else:
-        img_name=public_url
-        img_url=f"https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/images//{img_name}"
+def post_add_body(body_excerpt,page,date,title,topic ,name):
 
     return f"""
 <!DOCTYPE html>
@@ -92,7 +88,7 @@ def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منشور جديد</title>
+  <title>منشور جديد بعنوان {title}</title>
 </head>
 <body style="direction: rtl;background-color: rgba(233, 231, 231, 0.226); margin:0; padding:0; font-family: Arial, sans-serif;">
   <div style="background-color:#ffffff; margin:4px; padding:15px;">
@@ -115,17 +111,13 @@ def post_add_body(photo_url,body_excerpt,date,title,public_url,topic ,name):
         ضمن موضوع: <strong>{topic}</strong>.
       </p>
 
-      <!-- صورة المنشور -->
-      <div style="text-align:center; margin:20px 0;">
-        <img src="{img_url}" alt="صورة المنشور" style="max-width:90%; border-radius:8px;">
-      <!-- نص قصير -->
       <p style="font-size:14px; line-height:1.6; color:#555;">
         {body_excerpt}...
       </p>
 
       <!-- زر عرض المزيد -->
       <div style="text-align:center; margin:25px 0;">
-        <a href="https://abou-talib.vercel.app" 
+        <a href="https://abou-talib.vercel.app{'/'+page}" target="_blank"
            style="background-color:#0645AD; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-size:14px;">
           عرض المنشور كاملاً
         </a>
