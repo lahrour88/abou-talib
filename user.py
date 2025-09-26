@@ -121,6 +121,8 @@ def profile():
     img=None
     for user_ in datas :
         if user_["name"] == name :
+            posts.clear()
+            print(posts)
             user={
                 "name":name,
                 "profile":f"{img_profile_url}{user_["profile_filename"]}",
@@ -131,7 +133,8 @@ def profile():
                 if post["name"] == name:
                     for img in ["img1", "img2", "img3", "img4"] :
                         value= post.get(img)
-                        if isinstance(value, str) and value.strip():
+                        print(value,"and data type is ",type(value))
+                        if value is not None:
                             post[f"{img}_name"]=post[img]
                             post[img] = img_post_url + value
                             posts.append(post)
