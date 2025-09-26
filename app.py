@@ -42,21 +42,21 @@ def home():
             for img in ["img1", "img2", "img3", "img4"] :
                 value= post.get(img)
                 print(value,"and data type is ",type(value))
-                if value is not None:
+                if str(value) != "<class 'NoneType'>":
                     post[img] = img_url + value
             sport_post.append(post)
         elif post["page"] == "takafa":
             for img in ["img1", "img2", "img3", "img4"] :
                 value= post.get(img)
                 print(value,"and data type is ",type(value))
-                if value is not None:
+                if str(value) != "<class 'NoneType'>":
                     post[img] = img_url + value
             takafa_post.append(post)
         elif post["page"] == "news":
             for img in ["img1", "img2", "img3", "img4"] :
                 value= post.get(img)
                 print(value,"and data type is ",type(value))
-                if value is not None:
+                if str(value) != "<class 'NoneType'>":
                     post[img] = img_url + value
             news_post.append(post)
     return render_template('pages/index.html')

@@ -134,7 +134,8 @@ def profile():
                     for img in ["img1", "img2", "img3", "img4"] :
                         value= post.get(img)
                         print(value,"and data type is ",type(value))
-                        if value is not None:
+                        if str(type(value)) =="<class 'NoneType'>":
+                            print(f"{img} : {value} : '{type(value)}'")
                             post[f"{img}_name"]=post[img]
                             post[img] = img_post_url + value
                             posts.append(post)
