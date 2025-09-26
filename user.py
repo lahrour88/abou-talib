@@ -130,10 +130,11 @@ def profile():
             for post in post_data:
                 if post["name"] == name:
                     for img in ["img1", "img2", "img3", "img4"] :
-                        post[f"{img}_name"]=post[img]
-                        if post.get(img):
-                            post[img] =img_post_url+post[img]
-                    posts.append(post)
+                        value= post.get(img)
+                        if isinstance(value, str) and value.strip():
+                            post[f"{img}_name"]=post[img]
+                            post[img] = img_post_url + value
+                            posts.append(post)
             data={"user":user,"post":posts[::-1]}
             
             return render_template("pages/profile.html",datas=data) 

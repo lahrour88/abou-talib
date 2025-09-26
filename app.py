@@ -15,6 +15,7 @@ import io
 load_dotenv()
 app.secret_key = os.getenv("secret_key")
 app.permanent_session_lifetime = timedelta(days =900)
+
 # تهيئة Supabase
 url = os.getenv('url')
 key = os.getenv('key')
@@ -39,18 +40,21 @@ def home():
     for post in data :
         if post["page"] == "sport":
             for img in ["img1", "img2", "img3", "img4"] :
-                if post.get(img):
-                    post[img] =img_url+post[img]
+                value= post.get(img)
+                if isinstance(value, str) and value.strip():
+                    post[img] = img_url + value
             sport_post.append(post)
         elif post["page"] == "takafa":
             for img in ["img1", "img2", "img3", "img4"] :
-                if post.get(img):
-                    post[img] =img_url+post[img]
+                value= post.get(img)
+                if isinstance(value, str) and value.strip():
+                    post[img] = img_url + value
             takafa_post.append(post)
         elif post["page"] == "news":
             for img in ["img1", "img2", "img3", "img4"] :
-                if post.get(img):
-                    post[img] =img_url+post[img]
+                value= post.get(img)
+                if isinstance(value, str) and value.strip():
+                    post[img] = img_url + value
             news_post.append(post)
     return render_template('pages/index.html')
 
