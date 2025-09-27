@@ -77,8 +77,17 @@
     transform: translateY(-10px); /* اجعل الزر يرتفع بمقدار 10px */
     transition: transform 0.8s ease-in-out; /* أضف تأثير الانتقال */
   }
-
-  
+  #message{
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 15px;
+  } 
+  #message span{
+    color: rgb(44, 207, 44);
+    font-size: 16px;
+    font-weight: bold;
+  }
         </style>
     </head>
     
@@ -88,6 +97,11 @@
             <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
                 <div class="container">
                     <div class="row">
+                        <div id="message">
+                            {% if message %}
+                                <span>{{message}}</span >
+                            {% endif %}
+                        </div>
                         <div class="col-lg-8 col-12 mx-auto">
                             <h4 class="text-white text-center">فضاء تربوي متميز، حيث نُعزّز القيم، نُحفّز الإبداع، ونُؤهّل الأجيال للتميز الأكاديمي والاجتماعي.</h4>
                         </div>

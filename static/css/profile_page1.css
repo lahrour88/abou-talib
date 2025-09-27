@@ -19,7 +19,7 @@
             direction: rtl;
             position: relative;
             top: 30px;
-            margin: 5px auto;
+            margin: 8px auto;
             background: linear-gradient(135deg, #ffffff 0%, #f6f7f9 100%);
             padding: 20px;
             border-radius: 12px;
@@ -41,7 +41,7 @@
         @media screen and (max-width: 360px) {
             .article {
                 width: 100%;
-                margin: auto;
+                margin: 4px auto;
             }
         }
         .article h2 {

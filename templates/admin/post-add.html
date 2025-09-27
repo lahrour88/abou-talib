@@ -54,7 +54,7 @@
       <p style="color:red;">{{ error }}</p>
     {% endif %}
 
-    <div class="button"><input type="submit" value="نشر"></div>
+    <div class="button"><input type="submit" id="submitBtn" value="نشر"></div>
   </form>
 
   <!-- سكربتات في أسفل الصفحة -->
@@ -63,6 +63,21 @@
   <script src="/static/js/jquery.min.js"></script>
   <script src="/static/js/jquery.sticky.js"></script>
   <script src="/static/lien.js"></script>
+  <script>
+  const form = document.getElementById("postForm");
+  const btn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", function () {
+    btn.disabled = true;
+    btn.value = "جارٍ الإرسال...";
+
+    // إعادة تفعيل الزر بعد 10 ثوانٍ
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.value = "نشر";
+    }, 20000);
+  });
+</script>
 
   <script>
     // معاينة أسماء الملفات المرفوعة
