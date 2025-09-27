@@ -30,8 +30,8 @@ def delet():
                 print(response)
         
         response = (supabase.table("lahrour").delete().eq("id",post_id).execute())
-        resule ="تم حدف المنشور بنجاح"
-    return f"<h6>{resule ,(float(time.time()))-debut}</h6>"
+        resule =f"<span>تم حدف المنشور بنجاح id:{post_id}</span>"
+    return resule
 @app.route("/del",methods=["POST","GET"])
 def log_out():
     session.clear()

@@ -62,15 +62,14 @@
                 <h4>{{ datas.user.matier }}</h4>
             {% endif %}
         </div>
-
-        <div id="result"></div>
-
+        <div id="result">
+            <!-- رسالة الحذف ستظهر هنا -->
+        </div>
         {% if datas["post"] %}
             {% for post in datas["post"] %}
                 <section class="article">
                     <input type="hidden" name="name" value="{{ post.name }}">
                     <h6>{{ post.date }}</h6>
-
                     {% if session["name"] == datas.user.name or session["is_admin"] %}
                         <form hx-post="/delet" hx-target="#result" style="display:inline;">
                             <input type="hidden" name="post_id" value="{{ post.id }}">

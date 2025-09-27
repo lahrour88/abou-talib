@@ -260,16 +260,30 @@
             display: none !important;
         }
         }
-#title {
-        text-align: right;
-        margin: 20px 0;
-        font-size: 19px;
-        font-weight: bold;
-        color: #25435fad;
-        text-decoration-line: underline;
-        text-decoration-color: #25435fad;
-        text-decoration-style: dashed;
-        text-underline-offset: 4px;
-        text-decoration-thickness: 2px;
-      }
-
+        #title {
+                text-align: right;
+                margin: 20px 0;
+                font-size: 19px;
+                font-weight: bold;
+                color: #25435fad;
+                text-decoration-line: underline;
+                text-decoration-color: #25435fad;
+                text-decoration-style: dashed;
+                text-underline-offset: 4px;
+                text-decoration-thickness: 2px;
+            }
+        #result{
+            text-align: center;
+            position: fixed;
+            top: 15%;
+            background: transparent;
+            width: 100%;
+            height: 30px;
+            margin: auto;
+            z-index: 10;
+            transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) all 0.5s;
+        }
+        #result span{
+            color: green;
+            font-size: 18px;
+        }

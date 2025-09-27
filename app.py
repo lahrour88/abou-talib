@@ -35,23 +35,30 @@ def load_posts(page_name):
 @app.route('/')
 def home():
     session.permanent = True
-    print(session)
-    message=""
-    if session.get("send_email"):
-        new=time.time()
-        data=session.get("send_email")
-        body_excerpt=data["body"]
-        body_html = post_add_body( body_excerpt,data['page'],data['date'],data['title'],data["topic"], data["name"])
-        users = get_user_data(table="emails", coloms="email")
-        for user in users:
-            send_email(user['email'], subject=f"📢 منشور جديد: {data['title']}", body=body_html)
-            print("emailed:", user["email"])
-        print(int(time.time()-int(new))) 
-        session.pop("send_email", None)
-        message="تم إرسال التنبيهات إلى المشتركين بنجاح."
-        return render_template('pages/index.html',message=message)
     return render_template('pages/index.html')
 
+@app.route("/sender",methods=["POST","GET"])
+def sender():
+    if request.method == "POST":
+        post=request.form.get('post')
+        print(post)
+        message=""
+        if session.get("send_email"):
+            new=time.time()
+            data=session.get("send_email")
+            session.pop("send_email")
+            body_excerpt=data["body"]
+            body_html = post_add_body( body_excerpt,data['page'],data['date'],data['title'],data["topic"], data["name"])
+            users = get_user_data(table="emails", coloms="email")
+            for user in users:
+                send_email(user['email'], subject=f"📢 منشور جديد: {data['title']}", body=body_html)
+                print("emailed:", user["email"])
+            print(int(time.time()-int(new))) 
+            message="<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>"
+            return message
+        else:
+            message="<span>لا يوجد منشور لإرساله</span>"
+            return message
 @app.route("/message", methods=["POST"])
 def subscribe():
     email = request.form.get("Email")
@@ -146,13 +153,12 @@ def post_add():
                     name_in_table.append(None)
                     continue
 
-                # تقليص حجم الصورة باستخدام Pillow
                 try:
                     img = Image.open(file)
                     img = img.convert("RGB") 
                     img.thumbnail((800, 800))  
                     img_bytes = io.BytesIO()
-                    img.save(img_bytes, format="JPEG", quality=70)  # يمكنك تغيير الجودة حسب الحاجة
+                    img.save(img_bytes, format="JPEG", quality=70)
                     img_bytes.seek(0)
                     file_content = img_bytes.read()
                 except Exception as e:
@@ -164,7 +170,6 @@ def post_add():
                     name_in_table.append(None)
                     continue
 
-                # توليد اسم ملف فريد وآمن
                 unique_id = uuid.uuid4().hex
                 safe_basename = secure_filename(f"{unique_id}_{int(time.time())}")
                 filename = f"{safe_basename}{ext}"
@@ -186,7 +191,6 @@ def post_add():
             page=selected_page,
             date=date.today(),
         )
-        # بناء dict من خصائص new_post لإرسالها إلى Supabase
         data = {
             "img1": new_post.img1,
             "img2": new_post.img2,
@@ -199,15 +203,13 @@ def post_add():
             "name": new_post.name,
             "topic": new_post.topic
         }
-
-        # حفظ في Supabase
         resp = supabase.table('lahrour').insert(data).execute()
         body_excerpt = (data["body"][:150] + " ...") if data["body"] and len(data["body"]) > 150 else data["body"]
         sendent={
             "body":body_excerpt,"page":data["page"],"date":data['date'],'title':data['title'],'topic':data["topic"],"name":data["name"]
         }
         session["send_email"]=sendent
-        return redirect(url_for('home'))
+        return redirect(url_for(data["page"]))
 
     return render_template("admin/post-add.html", error=error)
 
