@@ -1,0 +1,71 @@
+.note-card {
+  background: linear-gradient(145deg, #ffffff, #f5f9ff);
+  border: 1px solid #e3eaf5;
+  border-radius: 20px;
+  width: 100%;
+  position: relative;
+  top: -90px;
+}
+
+.note-card h2 {
+  font-size: 26px;
+  color: #007bff;
+  letter-spacing: 1px;
+}
+.table{
+    direction: rtl;
+    width: 10px;
+}
+.table input {
+  width: 70px;
+  max-width: 100%;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.table input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.3);
+  outline: none;
+}
+
+.footer-form input {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.footer-form button {
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.footer-form button:hover {
+  background-color: #28a745 !important;
+}
+
+
+
+
+
+
+/* الحاوية الأساسية للجدول */
+.note-container {
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0;
+  padding: 4px;
+}
+
+/* الجدول */
+.note-container .table-responsive {
+  width: 100%;
+}
+
+.note-container table {
+  width: 100% !important;
+  table-layout: fixed; /* يخلي الأعمدة تتوزع بشكل متساوي */
+}

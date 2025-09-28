@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /login
+Disallow: /post_add
+Disallow: /add_user
+Allow: /
+Allow: /sport
+Allow: /takafa
+Allow: /chat_ai
+Allow: /note
+Allow: /profile
+Allow: /contact
+
+Sitemap: https://abou-talib.vercel.app/sitemap.xml

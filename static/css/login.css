@@ -1,0 +1,189 @@
+:root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --error-color: #e74c3c;
+            --text-color: #2c3e50;
+            --border-color: #ddd;
+            --light-bg: #f5f7fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+            height: 100%;
+        }
+
+        .login-container {
+            margin-top: 90px;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .login-header p {
+            color: #7f8c8d;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .error {
+            color: rgb(255, 0, 0);
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        h5{
+            color: red;
+        }
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            margin-left: 60%;
+            font-weight: 600;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            form {
+                padding: 25px;
+            }
+            
+            .form-control {
+                padding: 12px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            form {
+                padding: 20px;
+            }
+            
+            .form-control {
+                padding: 10px 12px;
+                font-size: 15px;
+            }
+            
+            .btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+        #result{
+            width: 100%;
+            margin: auto;
+        }
+        #email form{
+            width: 100%;
+        }
+        .error{
+            margin: auto;
+            padding: 4px;
+            color: red;
+        }
+        #error{
+            color: red;
+            font-size: 15px;
+        }
+        #sub{
+            background-color: #2980b9;
+        }

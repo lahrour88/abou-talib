@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+    <div id="result">
+    <div id="email" class="login-container">
+        <div class="login-header">
+        <form hx-post="/user_code" hx-target="#result">
+            <div class="form-group password">
+                <label for="password">رمز التحقق</label>
+                <input class="form-control" type="number" id="password" name="code" required placeholder="* * * * * *" maxlength="8" minlength="8">
+            </div>
+            <button type="submit" class="btn">ارسال الرمز</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

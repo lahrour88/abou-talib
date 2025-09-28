@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> انشطة ثانوية عبدالهادي بو طالب|الرياضة | الثقافة و الفنون | اخبار مؤسسة عبدالهادي بوطالب سيدي يحيى الغرب</title>
+    <meta name="description" content="يمكنك الاطلاع على كافة الانشطة المدرسية كالرياضة و الثقافة و الفنون الخاصة بثانوية عبدالهادي بوطالب">
+    <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/profile_page1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+</head>
+<body>
+    {%include 'appbare.html'%}
+    <!--navbare-->
+    <main>
+      {% if posts %}
+        {% for post in posts %}
+        <section class="article">
+          <div class="content-wrapper">
+            <div id="scrol" class="swiper post-slider">
+              <div id="head">
+                <form action="/news" method="POST">
+                    <input type="hidden" name="name" value="{{post.name}}">
+                    <input id="submit" type="submit" value="{{ post.name }}" style="height: 20px;">
+                </form>
+                <h6 id="date">{{ post.date }} </h6>
+              </div>
+                <div class="swiper-wrapper">
+                  {% for img in [post.img1, post.img2, post.img3, post.img4] %}
+                    {% if img %}
+                      <div class="swiper-slide">
+                        <img src="{{ img }}" alt="صورة مقال">
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
+              <div id="text">
+                <h2 id="title">{{ post.title }}</h2>
+                <p id="paragraph{{ post.id }}" class="paragraph collapsed">{{ post.body }}</p>
+                <a href="javascript:void(0);" id="toggle-link{{ post.id }}" class="toggle-link" data-id="{{ post.id }}">عرض المزيد</a>
+              </div>
+            </div>
+          </section>
+        {% endfor %}
+        {%else%}
+        <section class="article">
+          <div style="text-align: center; padding: 40px 0; color: var(--text-secondary);">
+            <h3>لا توجد منشورات حالياً. يرجى العودة لاحقاً.</h3>
+            <img src="/static/images/242d438d75a67c92a717b2d0b8787449.webp" alt="no post found" width="90%">
+          </div>
+        </section>
+        {% endif %}
+        {%include 'footer.html'%}
+        
+    </main>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="/static/lien.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="static/js/slider.js"></script>
+</body>
+</html>

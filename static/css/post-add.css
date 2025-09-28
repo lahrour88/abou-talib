@@ -1,0 +1,197 @@
+:root {
+            --primary-color: #B197FC;
+            --primary-dark: #9775FA;
+            --secondary-color: #FFD43B;
+            --error-color: #e74c3c;
+            --text-color: #2b2d42;
+            --border-color: #dee2e6;
+            --light-bg: #f8f9fa;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            direction: rtl;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        #postForm {
+            background-color: white;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #postForm a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        #postForm a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .sora, .file-upload, div > input, div > textarea, div > select {
+            margin-bottom: 25px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(177, 151, 252, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .upload-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-button:hover {
+            background-color: rgba(177, 151, 252, 0.1);
+        }
+
+        #fileInput {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        #fileName {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .home {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            text-align: center;
+        }
+
+        .button input[type="submit"] {
+            background-color: var(--secondary-color);
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        .button input[type="submit"]:hover {
+            background-color: #FCC419;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        p{
+            color: red;
+            font-size: 16px;
+            position: fixed;
+            z-index: 6;
+            top: 12px;
+            left: 3%;
+            right: 18%;
+        }
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            #postForm {
+                padding: 20px;
+            }
+            
+            input, textarea, select {
+                padding: 10px 12px;
+                font-size: 15px;
+            }
+            
+            .upload-button {
+                padding: 12px;
+                font-size: 15px;
+            }
+            
+            .button input[type="submit"] {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            #postForm {
+                padding: 15px;
+            }
+            
+            .button input[type="submit"] {
+                width: 100%;
+                position: static;
+                right: auto;
+            }
+        }

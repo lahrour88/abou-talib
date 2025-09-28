@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap-icons.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">    
+    <link rel="stylesheet" href="static/css/login.css">
+    <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/profile_page1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        sub{
+            background-color: rgb(117, 117, 235);
+        }
+    </style>
+</head>
+<body>
+{% include "appbare.html" %}
+    <div class="login-container">
+        <div class="login-header">
+            <h1>نسيت كلمة  المرور</h1>
+            <p>الرجاء تفقد بريدك الالكتروني للتحقق من هويتك </p>
+            <form action="/oublier" method="POST">
+                <div class="error">
+                    {%if error %}
+                        <h5 id="error">{{error}}</h5>
+                    {%endif %}
+                </div>
+            <div class="form-group name">
+                <label for="username">عنوان البريد الالكتروني</label>
+                <input class="form-control" type="email" name="email" id="username" required placeholder="أدخل بريدك الإلكتروني">
+            </div>
+            <button id="sub" type="submit" class="btn">تحقق</button>
+            </form>
+        </div>
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="staic/js/click-scroll.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+</body>
+</html>
