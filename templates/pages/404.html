@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - الصفحة غير موجودة</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: rgba(19, 116, 146, 0.418);
+    }
+    .notfound {
+      text-align: center;
+      padding: 20px;
+    }
+    .notfound img {
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+    .notfound h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    .notfound p {
+      font-size: 1.2rem;
+      color: #6c757d;
+    }
+    .notfound a {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #077af567;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .notfound a:hover {
+      background: #0057b3d8;
+    }
+  </style>
+</head>
+<body>
+  <div class="notfound">
+    <img src="/static/images/404.png" alt="404">
+    <h1>الصفحة غير موجودة</h1>
+    <p>الرابط الذي طلبته غير متاح حالياً.</p>
+    <a href="{{ url_for('home') }}">العودة إلى الصفحة الرئيسية</a>
+  </div>
+</body>
+</html>

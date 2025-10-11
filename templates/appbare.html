@@ -1,0 +1,91 @@
+<style>
+    #log_out{
+        background-color: rgba(207, 42, 42, 0.795);
+        border-radius: 5px;
+        color: white;
+    }
+    nav{
+        direction: ltr;
+    }
+    #login{
+        background-color: rgba(48, 168, 48, 0.788);
+        border-radius: 5px;
+        color: white;
+    }
+    #logo{
+        width: 0%;
+        height: auto;
+    }
+    #result{
+        color: green;
+        position: fixed;
+        top: 40%;
+        z-index: 20;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+<nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <i class="bi bi-house"></i>
+                        <span><img src="static/images/logo-abou-talib.png" alt="logo"></span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                 </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('sport')}}">الراياضة</a>
+                        </li>
+
+                        <li class="nav-item"></li>
+                            <a class="nav-link click-scroll"style="font-size: 20px;" href="{{url_for('takafa')}}">الثقافة و الفننون</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll"style="font-size: 20px;"  href="{{url_for('note')}}">حساب المعدل</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('news')}}">الاخبار</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('chat')}}"><i class="bi bi-robot"></i>  ai chat</a>
+                        </li>
+                        
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">outre</a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                {%if  session.get("send_email") %}
+                                <form hx-post="/sender" hx-target="#result">
+                                    <input type="hidden" name="post" value="post">
+                                    <li><input class="dropdown-item" type="submit" value="send email" ></li>
+                                </form>
+                                {% endif %}
+                                {%if  session["logged_in"] == True %}
+                                <li><a class="dropdown-item" href="{{url_for('post_add')}}">اضافة منشور</a></li>
+                                {% endif %}
+                                {%if  session["is_admin"] == True %}
+                                <li><a class="dropdown-item" href="{{url_for('add_user')}}">اضافة عضو جديد</a></li>
+                                {% endif %}
+                                {%if  session["logged_in"] == True %}
+                                <li><a class="dropdown-item" id="log_out" href="{{url_for('log_out')}}">تسجيل الخروج </a></li>
+                                {%else %}
+                                <li><a class="dropdown-item" id="login" href="{{url_for('login')}}">تسجيل الدخول</a></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="{{url_for('contact')}}">التواصل</a></li>
+                                <li>
+                                    <button id="installPWA" style="display: none;">📲 تثبيت التطبيق</button>
+        
+                                </li>
+                            
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="result" class></div>

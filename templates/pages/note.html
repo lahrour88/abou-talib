@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حساب النقاط | ثانوية عبد الهادي ابوطالب سيدي يحيى الغرب</title>
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="/static/css/note.css">
+  <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="static/css/profile_page1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  <style>
+    #foo{
+      direction: rtl;
+    }
+    #resulte_note{
+      color: rgb(62, 111, 202);
+      font-size: 20px;
+      text-align: center;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  {% include "appbare.html" %}
+
+  <main class="note-container container my-5">
+    <div id="continer" class="note-card shadow-lg p-4 rounded-4">
+      <h2 class="text-center mb-4 text-primary fw-bold">📊 حساب النقاط</h2>
+<form hx-post="/notes" hx-target="#resulte_note">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover text-center align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>المواد</th>
+          <th>الفرض الأول</th>
+          <th>الفرض الثاني</th>
+          <th>الفرض الثالث</th>
+          <th>الفرض الرابع</th>
+          <th>الأنشطة المندمجة</th>
+          <th>المعاملات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>الاجتماعيات</td>
+          <td><input type="number" name="ig1" placeholder="00" step="any"></td>
+          <td><input type="number" name="ig2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="ig-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="ig" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>التربية الاسلامية</td>
+          <td><input type="number" name="is1" placeholder="00" step="any"></td>
+          <td><input type="number" name="is2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="is-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="isl" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الرياضة</td>
+          <td><input type="number" name="sp1" placeholder="00" step="any"></td>
+          <td><input type="number" name="sp2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="sp-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="sp" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الرياضيات</td>
+          <td><input type="number" name="math1" placeholder="00" step="any"></td>
+          <td><input type="number" name="math2" placeholder="00" step="any"></td>
+          <td><input type="number" name="math3" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="math" value="7" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الفلسفة</td>
+          <td><input type="number" name="fl1" placeholder="00" step="any"></td>
+          <td><input type="number" name="fl2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="fl-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="fl" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الفيزياء</td>
+          <td><input type="number" name="pc1" placeholder="00" step="any"></td>
+          <td><input type="number" name="pc2" placeholder="00" step="any"></td>
+          <td><input type="number" name="pc3" placeholder="00" step="any"></td>
+          <td></td>
+          <td><input type="number" name="pc-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="pc" value="7" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الانجليزية</td>
+          <td><input type="number" name="en1" placeholder="00" step="any"></td>
+          <td><input type="number" name="en2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="en-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="en" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>العربية</td>
+          <td><input type="number" name="ar1" placeholder="00" step="any"></td>
+          <td><input type="number" name="ar2" placeholder="00" step="any"></td>
+          <td></td>
+          <td></td>
+          <td><input type="number" name="ar-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="ar" value="2" required step="any"></td>
+        </tr>
+        <tr>
+          <td>الفرنسية</td>
+          <td><input type="number" name="fr1" placeholder="00" step="any"></td>
+          <td><input type="number" name="fr2" placeholder="00" step="any"></td>
+          <td><input type="number" name="fr3" placeholder="00" step="any"></td>
+          <td><input type="number" name="fr4" placeholder="00" step="any"></td>
+          <td><input type="number" name="fr-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="fr" value="4" required step="any"></td>
+        </tr>
+        <tr>
+          <td>SVT</td>
+          <td><input type="number" name="svt1" placeholder="00" step="any"></td>
+          <td><input type="number" name="svt2" placeholder="00" step="any"></td>
+          <td><input type="number" name="svt3" placeholder="00" step="any"></td>
+          <td></td>
+          <td><input type="number" name="svt-n" placeholder="00" step="any"></td>
+          <td><input type="number" name="svt" value="7" required step="any"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-form text-center mt-4">
+    <div id="sub" class="input-group justify-content-center">
+      <input type="number" id="n" name="n" class="form-control w-50 rounded-start" placeholder="نقطة الأنشطة المندمجة" step="any" required>
+      <button type="submit" id="send" class="btn btn-success px-4 rounded-end">إرسال</button>
+    </div>
+  </div>
+</form>
+
+      <div id="resulte_note" class="mt-4 text-center fw-bold"></div>
+    </div>
+  </main>
+    {%include "footer.html" %}
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  <script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

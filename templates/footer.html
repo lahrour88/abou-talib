@@ -1,0 +1,70 @@
+<style>
+    
+.input-group {
+    display: flex;
+    align-items: center;
+    z-index: 44;
+  }
+  .input-group:hover{
+    transition: vertical .3s ase-in-out;
+    transform: translateY(-3px);
+  }
+  
+  .input {
+    min-height: 43px;
+    width: 50%;
+    max-width: 270px;
+    padding: 0 1rem;
+    color: #222223;
+    font-size: 16px;
+    border: 1px solid #848484;
+    border-radius: 20px 0 0 20px;
+    background-color: rgb(244, 250, 250);
+  }
+  
+  .button--submit {
+    min-height: 43px;
+    padding: 5.3px 2px;
+    border: 1px solid #848484;
+    border-radius: 0 20px 20px 0;
+    background-color: #6cbef1de;
+    color: rgb(231, 10, 197);
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+  }
+  
+  .button--submit:hover {
+    background-color: #9695d7;
+    color: #222223;
+  }
+  
+  .input:focus, .input:focus-visible {
+    border-color: #3898EC;
+    outline: none;
+  }
+  #log{
+    margin-top: 50px;
+  }
+</style>
+<footer class="site-footer section-padding">
+            <div class="container">
+                <div class="row" id="log">
+                  <a class="navbar-brand" href="{{url_for('home')}}">
+                    <i class="bi bi-house"></i>
+                        <span><img src="static/images/logo-abou-talib.png" alt="logo"><br><br></span>
+                </a>
+                </div class="submit" style="text-align: center;">
+                    <h6>هل ترغب في تلقي آخر الأخبار؟</h6>
+                    <p>اشترك في النشرة الإخبارية الخاصة بنا لتبقى على اطلاع دائم.</p>
+                    <form hx-post="/message" hx-target="#result">
+                        <!-- From Uiverse.io by alexruix --> 
+                        <div class="input-group">
+                            <input type="email" class="input" id="Email" name="Email" placeholder="uiverse@verse.io" autocomplete="off">
+                            <input class="button--submit" name="email" value="Subscribe" type="submit">
+                        </div>
+                    </form>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </footer>

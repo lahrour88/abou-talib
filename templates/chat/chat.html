@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>abou-talib.ai</title>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <link rel="stylesheet" href="/static/css/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+</head>
+<body>
+  {%include "appbare.html" %}
+  <div class="main-container">
+    <div class="chat-header">
+      ABOU-TALIB.AI
+    </div>
+    
+    <div id="chat-container">
+      {% if senders %}
+  {% for send in senders %}
+    {% if send.role == "user" %}
+      <div class="message user-message">
+        <div class="message-content">
+          <strong>you</strong>
+          <p>{{ send.content }}</p>
+        </div>
+      </div>
+    {% else %}
+      <div class="message ai-message">
+        <div class="message-content">
+          <strong>AI</strong>
+          <!-- نسمح ب HTML لأننا حوّلنا Markdown مسبقاً -->
+          <div>{{ send.content|safe }}</div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <div style="text-align: center; padding: 40px 0; color: var(--text-secondary);">
+    <h2>مرحباً، كيف يمكنني مساعدتك اليوم؟</h2>
+  </div>
+    {% endif %}
+    </div>
+    <div class="input-container">
+      <div class="input-box">
+        <form id="postForm" hx-post="/chat" hx-target="#chat-container" hx-on::after-request="this.reset()">
+          <textarea name="message" id="message" cols="30" rows="2" placeholder="اكتب رسالتك هنا..." autocomplete="off" required></textarea>
+          <button type="submit" onclick="send()" class="send-button">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+      <div class="disclaimer">
+        abou-talib.ai يمكن أن يقدم أحياناً معلومات خاطئة. يرجى التحقق من المعلومات المهمة
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  
+
+    // التمرير إلى الأسفل عند إضافة رسائل جديدة
+    document.body.addEventListener('htmx:afterSwap', function() {
+      const chatContainer = document.getElementById('chat-container');
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      
+      // إضافة مؤشر الكتابة عند استلام رد جديد
+      const aiMessages = document.querySelectorAll('.ai');
+      if (aiMessages.length > 0) {
+        const lastAiMessage = aiMessages[aiMessages.length - 1];
+        lastAiMessage.querySelector('p').innerHTML = '<span class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></span>';
+        
+        // محاكاة الكتابة ثم إظهار النص
+        setTimeout(() => {
+          lastAiMessage.querySelector('p').textContent = "هذا هو رد الذكاء الاصطناعي على سؤالك. يمكنني تقديم معلومات وإجابات على أسئلتك بطريقة مشابهة لـ ChatGPT.";
+        }, 1500);
+      }
+    });
+  </script>
+          <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="/static/lien.js"></script>
+</body>
+</html>

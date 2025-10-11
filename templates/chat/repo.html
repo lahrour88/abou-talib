@@ -1,0 +1,30 @@
+{% if senders %}
+  {% for send in senders %}
+    {% if send.role == "user" %}
+      <div class="message user-message">
+        <div class="message-content">
+          <strong>you</strong>
+          <p>{{ send.content }}</p>
+        </div>
+      </div>
+    {% else %}
+      <div class="message ai-message">
+        <div class="message-content">
+          <strong>AI</strong>
+          <!-- نسمح ب HTML لأننا حوّلنا Markdown مسبقاً -->
+          <div>{{ send.content|safe }}</div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <div style="text-align: center; padding: 40px 0; color: var(--text-secondary);">
+    <h2>مرحباً، كيف يمكنني مساعدتك اليوم؟</h2>
+    <p style="margin-top: 15px; font-size: 14px;">يمكنني الإجابة على أسئلتك، المساعدة في الكتابة، توليد الأفكار والمزيد</p>
+  </div>
+{% endif %}
+
+
+
+
+        <form hx-post="/chat" hx-target="#chat-container" hx-swap="beforeend" hx-on::after-request="if(event.detail.successful) this.reset()"></form>

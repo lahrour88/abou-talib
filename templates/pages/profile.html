@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abou-talib.com</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/templatemo-topic-listing.css">
+    <link rel="stylesheet" href="/static/css/profile_page1.css">
+    <!-- Font Awesome (نسخة واحدة فقط) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+
+    <style>
+        /* ===== قسم الملف الشخصي ===== */
+        .profile {
+            max-width: 800px;
+            margin: 50px auto 30px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            margin-bottom: 15px;
+        }
+
+        .profile h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profile h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 3px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    {% include "appbare.html" %}
+    <main>
+        <div class="profile">
+            {% if datas["user"] %}
+                <img src="{{ datas.user.profile }}" alt="profile">
+                <h1>{{ datas.user.name }}</h1>
+                <h4>{{ datas.user.email }}</h4>
+                <h4>{{ datas.user.matier }}</h4>
+            {% endif %}
+        </div>
+        <div id="result">
+            <!-- رسالة الحذف ستظهر هنا -->
+        </div>
+        {% if datas["post"] %}
+            {% for post in datas["post"] %}
+                <section class="article">
+                    <input type="hidden" name="name" value="{{ post.name }}">
+                    <!--end if admin -->
+                    <!-- article sections -->
+                    <div class="content-wrapper">    
+                        <div id="scrol" class="swiper post-slider">
+                            <div id="scrol">
+                            <h6>{{ post.date }}</h6>
+                            <!--ssi is admin -->
+                            {% if session["name"] == datas.user.name or session["is_admin"] %}
+                                <form hx-post="/delet" hx-target="#result" style="display:inline;">
+                                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                                    {% for name, img_name in [ ("img1",post.img1_name), ("img2",post.img2_name), ("img3",post.img3_name), ("img4",post.img4_name), ] %}
+                                            {% if img_name %}
+                                                    <input type="hidden" name="{{name}}" value="{{img_name}}">
+                                            {% endif %}
+                                            {% endfor %}
+                                            <button type="submit" title="حذف" style="
+                                        background-color: #ff4d4d;
+                                        border: none;
+                                        border-radius: 50%;
+                                        width: 40px;
+                                        height: 40px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        cursor: pointer;
+                                        transition: transform 0.2s, background-color 0.2s;
+                                        color: white;
+                                        font-size: 18px;
+                                        padding-bottom: 3px;"
+                                        onmouseover="this.style.backgroundColor='#ff1a1a'; this.style.transform='scale(1.1)';"
+                                        onmouseout="this.style.backgroundColor='#ff4d4d'; this.style.transform='scale(1)';">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            {% endif %}
+                            </div>
+                            <div class="swiper-wrapper">
+                                {% for img in [post.img1, post.img2, post.img3, post.img4] %}
+                                {% if img %}
+                                <div class="swiper-slide">
+                                    <img src="{{ img }}" alt="صورة {{ post.title }}">
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+
+                        <div id="text">
+                            <h2 id="title">{{ post.title }}</h2>
+                            <p id="paragraph{{ post.id }}" class="paragraph collapsed">{{ post.body }}</p>
+                            <a href="javascript:void(0);" id="toggle-link{{ post.id }}" class="toggle-link" data-id="{{ post.id }}">عرض المزيد</a>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        {% else %}
+        <section class="article">
+          <div style="text-align: center; padding: 40px 0; color: var(--text-secondary);">
+            <h5>لا توجد منشورات حالياً. يرجى العودة لاحقاً.</h5>
+            <img src="/static/images/242d438d75a67c92a717b2d0b8787449.webp" alt="no post found" width="96%" style="margin: auto;">
+          </div>
+        </section>
+        {% endif %}
+
+        {% include 'footer.html' %}
+    </main>
+
+    <!-- JS -->
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.sticky.js"></script>
+    <script src="static/js/custom.js"></script>
+    <script src="/static/lien.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="static/js/slider.js"></script>
+
+    <script>
+        let imgs = document.getElementsByName("img1");
+        imgs.forEach(el => console.log(el.value));
+    </script>
+</body>
+</html>

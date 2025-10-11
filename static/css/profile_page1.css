@@ -1,0 +1,404 @@
+*{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image:url(https://img.freepik.com/vecteurs-premium/imprime_204950-366.jpg?w=740);
+            padding: 1px;
+            color: #333;
+        }
+        main{
+            position: relative;
+            top: 30px;
+            width: 100%;
+        }
+        .article {
+            direction: rtl;
+            position: relative;
+            top: 30px;
+            margin: 8px auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f6f7f9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e0e3e9;
+        }
+        .article p{
+            
+            width: 97%;
+        }
+        @media (max-width: 768px) {
+            .article {
+                width: 100%;
+                margin: auto;
+            }
+            
+        }
+        @media screen and (max-width: 360px) {
+            .article {
+                width: 100%;
+                margin: 4px auto;
+            }
+        }
+        .article h2 {
+            text-align: center;
+            color: hsl(210, 29%, 24%);
+            margin-bottom: 10px;
+            font-size: 17.5px;
+            font-weight: 60;
+            position: relative;     
+            width: 40%;
+            padding-bottom: 10px;
+            text-decoration: #2980b9;
+        }
+
+        .article form input{
+            background-color: transparent;
+            border: none;
+            color: rgb(0, 119, 255);
+            text-decoration: rgb(83, 83, 223);
+            margin-bottom: 6px;
+        }
+        .article h6 {
+            text-align: center;
+            color: #7196f6;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            z-index: 1;
+            position:absolute;     
+            width: 160px;
+            left: 1px;
+            top: 20px;
+            padding-bottom: 10px;
+            
+        }
+        .article form input submit::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100%;
+    max-width: 200px;
+    height: 3px;
+    background: linear-gradient(to right, #3498db, rgb(0, 234, 255), #2ecc71);
+    border-radius: 3px;
+}
+
+        
+        .content-wrapper {
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background-color: transparent;
+        }
+        
+        .article img:hover {
+            transform: scale(1.02);
+        }
+        
+        .paragraph {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 17px;
+            text-align: justify;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            white-space: pre-line; 
+        }
+        
+        .paragraph.collapsed {
+            max-height: 7.4em;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            white-space: pre-line; 
+            overflow: hidden;
+        }
+        .col-lg-3{
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            flex: 0 0 25%;
+            max-width: 25%;
+            color: red;
+        }
+        @media screen and (min-width: 768px) {
+            .paragraph.collapsed {
+                max-height: 72em;
+            }
+            
+            
+        }
+        
+        .toggle-link {
+            display: inline-flex;
+            align-items: center;
+            color: #2980b9;
+            text-decoration: none;
+            margin-top: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 00px 00px 30px rgb(128, 164, 181);
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+        
+        .toggle-link:hover {
+            color: #1a5276;
+            background-color: rgba(41, 128, 185, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .toggle-link::before {
+            content: "→";
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-link.expanded::before {
+            transform: rotate(90deg);
+        }
+        
+        
+        
+        @media (min-width: 768px) {
+            .content-wrapper {
+                display: flex;
+                gap: 50px;
+                align-items: flex-start;
+            }
+            
+            .article img {
+                flex: 0 0 45%;
+                margin-bottom: 0;
+                max-width: 45%;
+            }
+            
+            .paragraph {
+                flex: 1;
+                margin-top: 0;
+            }
+            .toggle-link{
+                position: absolute;
+                margin-bottom: 40px;
+                z-index: -111;
+                color: transparent;
+                background-color: transparent;
+                
+            }
+            #scrol{
+            justify-content: left;
+            text-align: left;
+            margin: auto;
+            width: 100%;
+        }
+        }
+        
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .article {
+                animation: fadeIn 0.6s ease-out;
+            }
+            /* From Uiverse.io by alexruix */
+            .swiper-slide {
+            display: flex;
+            justify-content: right;
+            align-items: right;
+                }
+
+            .swiper-slide img {
+                max-width: 100%;
+                height: auto;   /* يتكيف مع أبعاد الصورة */
+                object-fit: contain;
+            }
+
+            .swiper-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: #fff;
+                background: rgba(0,0,0,0.3);
+                border-radius: 4px;
+                
+            }
+
+            .swiper-button-next:after,
+            .swiper-button-prev:after {
+                font-size: 15px;
+                
+            }
+
+            .swiper-pagination-bullet {
+                background: #fff;
+                opacity: 0.7;
+            }
+
+            .swiper-pagination-bullet-active {
+                background: #2980b9;
+            }
+
+            /* نهاية الكود من Uiverse.io */ 
+            @media (max-width: 768px) {
+        .swiper-button-next,
+        .swiper-button-prev {
+            display: none !important;
+        }
+        #scrol{
+            justify-content: center;
+            text-align: center;
+            margin: auto;
+            width: 100%;
+        }
+        }
+        #title {
+                text-align: right;
+                margin: 20px 0;
+                font-size: 19px;
+                font-weight: bold;
+                width: 100%;
+                color: #25435fad;
+                text-decoration-line: underline;
+                text-decoration-color: #25435fad;
+                text-decoration-style: dashed;
+                text-underline-offset: 4px;
+                text-decoration-thickness: 2px;
+            }
+        #result{
+            text-align: center;
+            position: fixed;
+            top: 15%;
+            background: transparent;
+            width: 100%;
+            height: 30px;
+            margin: auto;
+            z-index: 10;
+            transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) all 0.5s;
+        }
+        #result span{
+            color: green;
+            font-size: 18px;
+        }
+            #message {
+            text-align: center;
+            position: fixed;
+            top: 15%;
+            background: transparent;
+            width: 100%;
+            height: 30px;
+            margin: auto;
+            z-index: 10;
+            transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) all 0.5s;
+        }
+        #message span{
+            color: green;
+            font-size: 18px;
+        }
+        #scrol{
+            justify-content: right;
+            text-align: right;
+            margin: auto;
+            width: 60%;
+        }
+        #text{
+            width: 40%;
+            justify-content: left;
+            text-align: center;
+        }
+        #date{
+            z-index: 4;
+        }
+        #head{
+            margin-bottom: 5px;
+        }
+        @media (max-width: 768px) {
+    #scrol {
+        width: 100%;
+    }
+}
+#head {
+    display: flex;
+    align-items: center;  /* يضمن أن العناصر بنفس الارتفاع العمودي */
+    justify-content: space-between; /* يوزعهم يمين ويسار */
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#head form {
+    margin: 0;
+}
+
+#date {
+    position: static; /* أزل التمركز المطلق */
+    margin: 0;
+}
+#no-posts {
+    text-align: center;
+    color: var(--text-secondary);
+    justify-content: center;
+    width: 97%;
+    max-width: 400px;
+    margin: auto;
+}
+#text{
+    width: 100%;
+}
+
+#pd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    margin-top: 30px;
+  width: 100px;
+  height: 100px; /* عدّل الارتفاع حسب التصميم */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#pd:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+#pd a#pdf {
+  text-decoration: none;
+  color: #1a73e8;
+  font-size: 18px;
+  font-weight: 600;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#pd a#pdf:hover {
+  background: #1a73e8;
+  color: white;
+}
+
