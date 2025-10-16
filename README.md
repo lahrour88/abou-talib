@@ -23,7 +23,7 @@
 
 - **Front-end:** HTML / CSS / JavaScript  
 - **Back-end:** Python + Flask  
-- **قاعدة البيانات:** Supabase
+- **قاعدة البيانات:** Supabase  
 - **الأمان:** حماية الصفحات الحساسة، إدارة الصلاحيات  
 
 ---
@@ -49,12 +49,12 @@ cd abou-talib
 pip install -r requirements.txt
 ```
 
-4. تشغيل المشروع:
+3. تشغيل المشروع:
 ```bash
 python app.py
 ```
 
-5. الوصول إلى التطبيق عبر المتصفح:
+4. الوصول إلى التطبيق عبر المتصفح:
 ```
 http://localhost:5000
 ```
@@ -89,12 +89,14 @@ http://localhost:5000
 **المطور:** lahrour abdelaadime
 
 [رابط GitHub](https://github.com/lahrour88)  
-[رابط instagram](https://instagram.com/lahrour_1902)    
+[رابط Instagram](https://instagram.com/lahrour_1902)    
 
 ---
 
-## 🔗 روابط الموقع على vercel
+## 🔗 روابط الموقع على Vercel
 [abou-talib.vercel.app](https://abou-talib.vercel.app)  
+
+---
 
 ## 🗂️ المخططات التوضيحية
 
@@ -117,6 +119,12 @@ sequenceDiagram
         BE-->>FE: رسالة خطأ
         FE-->>User: عرض إشعار فشل الدخول
     end
+```
+
+---
+
+### ⚙️ بنية المشروع
+```mermaid
 graph TD
     subgraph Client [💻 الواجهة الأمامية]
         A[👨‍🏫 أستاذ]
@@ -151,7 +159,12 @@ graph TD
     S --> P
     AI --> D
     AI --> G
+```
 
+---
+
+### 🧩 العلاقات بين الجداول
+```mermaid
 erDiagram
     USERS ||--o{ POSTS : "ينشئ"
     USERS ||--o{ GRADES : "يحصل"
@@ -178,4 +191,4 @@ erDiagram
         int value
         string subject
     }
-
+```
