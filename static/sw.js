@@ -3,7 +3,7 @@ self.addEventListener('install', function(event) {
     console.log("📦 Service Worker Installing...");
 
     event.waitUntil(
-        caches.open('sw-cache-v7').then(function(cache) {
+        caches.open('sw-cache-v1').then(function(cache) {
             console.log("🛠️ Caching assets...");
             return cache.addAll([
                 '/',
@@ -42,7 +42,7 @@ self.addEventListener('activate', function(event) {
         caches.keys().then(function(cacheNames) {
             return Promise.all(
                 cacheNames.map(function(cacheName) {
-                    if (cacheName !== 'sw-cache-v7') {
+                    if (cacheName !== 'sw-cache-v1') {
                         console.log("🗑️ Deleting old cache:", cacheName);
                         return caches.delete(cacheName);
                     }

@@ -7,7 +7,7 @@ from storage import get_storage_size
 from sender import send_email ,contact_body ,post_add_body
 from datetime import date
 from dotenv import load_dotenv
-from user import user_verifiede ,get_user_data
+from user import user_verifiede ,get_user_data ,delet_email
 from datetime import timedelta 
 from werkzeug.utils import secure_filename
 from PIL import Image ,ImageOps
@@ -66,13 +66,10 @@ def sender():
             users = get_user_data(table="emails", coloms="email")
             userse=[]
             for user in users:
-                print(user['email'])
                 userse.append(user['email'])
-            print(userse)
-            send_email(userse, subject=f"📢 منشور جديد: {data['title']}", body=body_html)
-            print(int(time.time()-int(new))) 
-            message="<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>"
-            return message
+            result ,emails_delet =send_email(userse, subject=f"📢 منشور جديد: {data['title']}", body=body_html)
+            delet_email(emails_delet)
+            return result
         else:
             message="<span>لا يوجد منشور لإرساله</span>"
             return message
@@ -112,8 +109,10 @@ def news():
         print(name)
         return redirect(url_for("profile",name=name))
     return render_template('pages/main_page.html', posts=data[::-1])
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
+
+
+@app.route('/contact__', methods=['GET', 'POST'])
+def contact__():
     try:
         error = None
         admin= os.getenv("admin_email")
@@ -123,14 +122,21 @@ def contact():
             message = request.form['message']
             subject=request.form.get("subject")
             classe = request.form['class']
+            print(name)
             body=contact_body(email,name,message,classe,subject)
-            return send_email(admin ,subject,body)
+            print("body")
+            send_email(admin ,subject,body)
+            return "تم تسليم رسالتك بنجاح"
     except Exception as e:
         error =f"Error during contact: {e}"
         print(error)
         return error
-        
-    return render_template('pages/contact.html', error=error)
+    
+@app.route("/contact",methods=["POST","GET"])
+def contact():
+    return render_template('pages/contact.html')
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     try:

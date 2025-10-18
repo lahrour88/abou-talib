@@ -57,10 +57,23 @@
     </div>
     <div id="result"></div>
     <div class="button">
-      <input type="submit" value="إضافة المستخدم">
+      <input type="submit" id="submitBtn" value="إضافة المستخدم">
     </div>
   </form>
-          <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script>
+  const form = document.getElementById("postForm");
+  const btn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", function () {
+    btn.disabled = true;
+    btn.value = "جاري اضافة ...";
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.value = "الاتصال بالانترنت ضعيف ";
+    }, 870000);
+  });
+</script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/custom.js"></script>
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/jquery.sticky.js"></script>

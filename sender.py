@@ -10,23 +10,30 @@ load_dotenv()
 sender_email = os.getenv("email_sender")
 password = os.getenv("email_password")
 def send_email(users , subject , body):
-    msg = MIMEText(body, "html", "utf-8")
-    msg['Subject'] = subject
-    msg['From'] = sender_email
-    if type(users) == list:
-        msg['To'] = ", ".join(users)
-    else:
-        msg['to']=str(users)
-        print(users)
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login(sender_email, password)
-            b=server.send_message(msg)
-            result ="Email sent successfully!"
-            return result
-    except Exception as e:
-        return f"error: {e}"
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+      server.starttls()
+      server.login(sender_email, password)
+      black_list=[]
+      if type(users) == str :
+          try:
+              msg = MIMEText(body, "html", "utf-8")
+              msg['Subject'] = subject
+              msg['From'] = sender_email
+              msg['To'] = users
+              server.send_message(msg)
+          except Exception as e:
+              return e
+      elif type(users) == list:
+          for user in users:
+              try:
+                  msg = MIMEText(body, "html", "utf-8")
+                  msg['Subject'] = subject
+                  msg['From'] = sender_email
+                  msg['To'] = user
+                  server.send_message(msg)
+              except Exception as e:
+                  black_list.append(user)
+          return "<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>" ,black_list    
 
 def contact_body(email,name,message,classe,subject):
     body=f"""
@@ -42,8 +49,8 @@ def contact_body(email,name,message,classe,subject):
 
     <!-- الشعار -->
     <nav>
-      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/abou-talib.png" 
-           alt="Logo" width="80%" style="display:block; margin-left:9%;">
+      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/logo-abou-talib.png" 
+           alt="Logo" width="80%" style="display:block; margin:auto; margin-left:9%;">
     </nav>
 
     <!-- خط فاصل -->
@@ -55,7 +62,7 @@ def contact_body(email,name,message,classe,subject):
       
       <p style="font-size:15px;">
         توصلتم برسالة جديدة من <strong style="color:blue;">{name}</strong>  
-        (القسم: <strong>{classe}</strong>).
+        <br>القسم: <strong>{classe}</strong>.
         <p>البريد الإلكتروني: <strong style="color:blue;">{email}</strong>
       </p>
 
@@ -100,8 +107,8 @@ def post_add_body(body_excerpt,page,date,title,name):
 
     <!-- الشعار -->
     <nav>
-      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/abou-talib.png" 
-           alt="Logo" width="80%" style="display:block; margin-left:9%;">
+      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/logo-abou-talib.png" 
+           alt="Logo" width="80%" margin:auto; style="display:block; margin-left:9%;">
     </nav>
 
     <!-- خط فاصل -->
@@ -156,7 +163,7 @@ def oublier_body(email,code__):
     
     <!-- الصورة -->
     <nav>
-      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/abou-talib.png" alt="Logo" width="80%" style="display:block; margin-left:9%;">
+      <img src="https://biytrshphtxlywabygcc.supabase.co/storage/v1/object/public/emails/logo-abou-talib.png" alt="Logo" width="80%" style="display:block;margin:auto;  margin-left:9%;">
     </nav>
 
     <!-- الخط الفاصل -->

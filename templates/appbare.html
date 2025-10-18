@@ -38,17 +38,17 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('sport')}}">الراياضة</a>
+                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('sport')}}">الرياضة</a>
                         </li>
 
                         <li class="nav-item"></li>
-                            <a class="nav-link click-scroll"style="font-size: 20px;" href="{{url_for('takafa')}}">الثقافة و الفننون</a>
+                            <a class="nav-link click-scroll"style="font-size: 20px;" href="{{url_for('takafa')}}">الثقافة و الفنون</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll"style="font-size: 20px;"  href="{{url_for('note')}}">حساب المعدل</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('news')}}">الاخبار</a>
+                            <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('news')}}">الأخبار</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link click-scroll" style="font-size: 20px;" href="{{url_for('chat')}}"><i class="bi bi-robot"></i>  ai chat</a>
@@ -56,7 +56,7 @@
                         
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">outre</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">autre</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 {%if  session.get("send_email") %}
@@ -88,4 +88,4 @@
                 </div>
             </div>
         </nav>
-        <div id="result" class></div>
+        <div id="result"></div>

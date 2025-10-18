@@ -17,38 +17,38 @@ def chat():
     return render_template('chat/chat.html')
 
 def eq_topic(message):
-    message = message.lower()
-    response = supabase.table("lahrour").select("body","id","date","topic").execute()
-    topics = response.data[::-1]
-    words = message.split()  
-    
-    best_match = None
-    best_score = 0
+    try:
+        message = message.lower()
+        response = supabase.table("lahrour").select("body","topic").execute()
+        topics = response.data[::-1]
+        words = message.split()  
+        
+        best_match = None
+        best_score = 0
 
-    for topic in topics:
-        # تقسيم الاحتمالات بعلامة # أو //
-        possible_questions = topic["topic"].replace("|", "#").split("#")
-        for question in possible_questions:
-            question = question.strip().lower()
-            print(question)
-            if not question:
-                continue
+        for topic in topics:
+            # تقسيم الاحتمالات بعلامة # أو //
+            possible_questions = topic["topic"].replace("|", "#").split("#")
+            for question in possible_questions:
+                question = question.strip().lower()
+                if not question:
+                    continue
 
-            score_full = fuzz.partial_ratio(message, question)
-            score_words = max(fuzz.partial_ratio(word, question) for word in words)
-            score = int(0.7 * score_words + 0.3 * score_full)
+                score_full = fuzz.partial_ratio(message, question)
+                score_words = max(fuzz.partial_ratio(word, question) for word in words)
+                score = int(0.7 * score_words + 0.3 * score_full)
 
-            if score > best_score:
-                best_score = score
-                best_match = topic
-                print(topic['id'])
+                if score > best_score:
+                    best_score = score
+                    best_match = topic
 
-    if best_score > 65:
-        print(f"🔍 Debug: أفضل تطابق بنسبة {best_score}%")
-        print(best_match["id"])
-        return best_match["body"]
-
-    return "لم نتمكن من اعثور على نتائج  مطابقة لبحث المستخدم "
+        if best_score > 75:
+            print(f"🔍 Debug: أفضل تطابق بنسبة {best_score}%")
+            return best_match["body"]
+        return False
+    except Exception as error:
+        print(error)
+        return "نواجه مشكلة في الخادم"
 
 @app.route("/chat", methods=["POST", "GET"])
 def main():
@@ -67,6 +67,6 @@ def main():
             html_response = markdown.markdown(response_text, extensions=["fenced_code", "tables"])
             senders.append({"role": "ai", "content": html_response})
         else:
-            senders.append({"role": "ai", "content": f"للاسف لم يتم العثور على {message}"})
+            senders.append({"role": "ai", "content": f"للاسف لم يتم العثور على نتائج مطابقة لبحثك {message}"})
     return render_template("chat/repo.html", senders=senders)
 

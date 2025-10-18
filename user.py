@@ -16,8 +16,14 @@ def get_user_data(table,coloms):
     response = supabase.table(table).select(coloms).execute()
     return response.data
 
-
-
+def delet_email(emails):
+    for email in emails:
+        try:
+            statue=supabase.table('emails').delete().eq("email",email).execute()
+            print(statue)
+        except Exception as error :
+            print(error)
+    
 @app.route('/delet',methods=['POST',"GET"])
 def delet():
     try:
@@ -151,7 +157,7 @@ def profile():
     for user_ in datas :
         if user_["name"] == name :
             posts.clear()
-            print(posts)
+            
             user={
                 "name":name,
                 "profile":f"{img_profile_url}{user_["profile_filename"]}",
@@ -167,8 +173,6 @@ def profile():
                             post[img] = img_post_url + value
                     posts.append(post)
             data={"user":user,"post":posts[::-1]}
-            for p in data['post']:
-                print(p,"\n")
             return render_template("pages/profile.html",datas=data) 
     else:
         return "<h4> error reloud uder data </h4>"
@@ -194,7 +198,7 @@ def add_user():
             ext = os.path.splitext(profile_file.filename)[1].lower()
             exts=[".png", ".jpg", ".jpeg"]
             if ext not in exts:
-                return f"صيغة الملف غيد مدعومة من الافضل حولها اوى {exts}"
+                return f"امتداد الملف غير مدعوم "
             # اسم الملف يكون username + الامتداد
             safe_name = secure_filename(name)  
             filename = f"{safe_name}{ext}"
@@ -217,7 +221,7 @@ def add_user():
         }
 
         response = supabase.table("users").insert(user).execute()
-        return f"نجاح {response}"
+        return f"تمت العملية بنجاح"
 
     return render_template("admin/add_user.html")
 
