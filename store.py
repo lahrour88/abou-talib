@@ -15,8 +15,6 @@ class Post:
         self.img3=img3
         self.img4=img4
         
-
-
 class users:
     def __init__(self ,password , email , name , matier ,is_admin ,profile_filename):
         self.password=password

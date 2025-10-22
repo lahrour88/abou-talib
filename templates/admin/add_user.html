@@ -30,7 +30,7 @@
       <input type="text" id="name" name="name" placeholder="أدخل الاسم الكامل" required>
     </div>
       <label for="name">صورة الملف الشخصي</label>
-      <input type="file" id="name" name="profile" accept="image/*" required>
+      <input type="file" id="name" name="profile" accept="image/*">
     </div>
 
     <div>
@@ -55,6 +55,12 @@
         <option value="True">أدمن</option>
       </select>
     </div>
+    <div id="message-container"
+     hx-get="/repo"
+     hx-trigger="load, every 1s"
+     hx-swap="innerHTML">
+</div>
+
     <div id="result"></div>
     <div class="button">
       <input type="submit" id="submitBtn" value="إضافة المستخدم">
@@ -63,13 +69,14 @@
     <script>
   const form = document.getElementById("postForm");
   const btn = document.getElementById("submitBtn");
-
+  const val =document.getElementById('result')
+  console.log(val)
   form.addEventListener("submit", function () {
     btn.disabled = true;
     btn.value = "جاري اضافة ...";
     setTimeout(() => {
       btn.disabled = false;
-      btn.value = "الاتصال بالانترنت ضعيف ";
+      btn.value = val;
     }, 870000);
   });
 </script>

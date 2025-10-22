@@ -71,7 +71,11 @@
     <main>
         <div class="profile">
             {% if datas["user"] %}
+            {% if datas.user.profile %}
                 <img src="{{ datas.user.profile }}" alt="profile">
+            {% else %}
+            <img src="/static/images/blank-profile-picture-973460_1280.webp" alt="profile">
+            {% endif %}
                 <h1>{{ datas.user.name }}</h1>
                 <h4>{{ datas.user.email }}</h4>
                 <h4>{{ datas.user.matier }}</h4>

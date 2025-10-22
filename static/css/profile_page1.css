@@ -402,3 +402,52 @@
   color: white;
 }
 
+/* حاوية الرسائل 
+.flash-message{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+*/
+/* الرسالة الفردية */
+.flash-message {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    direction: rtl;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: slideIn 0.5s ease;
+    
+}
+.flash-message #flash{
+    color: red;
+    font-size: 30px;
+    z-index: 100;
+    text-align: center;
+}
+
+
+/* حركة الدخول */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* زر إغلاق */
+.flash-message .close {
+    float: right;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+
+}

@@ -28,22 +28,24 @@
   <form id="postForm" action="{{ url_for('post_add') }}" method="POST" enctype="multipart/form-data">
     <div class="file-upload">
       <br>
+      {% include "flash.html" %}
+      <br>
       <input type="file" name="img1" id="img1" accept="image/*">
       <input type="file" name="img2" id="img2" accept="image/*">
       <input type="file" name="img3" id="img3" accept="image/*">
-      <input type="file" name="img4" id="img4" accept="image/*">
+      <input type="file" name="img3" id="img4" accept="image/*">
     </div>
     <div><input type="text" name="title" placeholder="العنوان" required></div>
-    <div><input type="text" name="topic" placeholder="ضع الاحتمالات للفصل بينها استعمل // أو #"></div>
+    <div><input type="text" name="topic" placeholder="الأسئلة التي يجب عنها المنشور بين كل سؤال / او #"></div>
     <div><textarea name="body" rows="4" placeholder="اكتب نص ..."></textarea></div>
 
     <div>
       <select name="page" id="page" required>
         <option value="">اختر وجهة المنشور</option>
-        <option value="sport">sport</option>
-        <option value="takafa">takafa</option>
-        <option value="news">news</option>
-      </select>
+        <option value="sport">الأنشطة الرياضية</option>
+        <option value="takafa">الأنشطة الثقافية</option>
+        <option value="news">الأخبار والاعلانات</option>
+      </select> 
     </div>
 
     <a class="home" href="{{ url_for('home') }}">إلغاء النشر</a>
@@ -69,8 +71,8 @@
     btn.value = "جارٍ الإرسال...";
     setTimeout(() => {
       btn.disabled = false;
-      btn.value = "نشر";
-    }, 80000);
+      btn.value = "الانترنت ضعيف ";
+    }, 880000);
   });
 </script>
 

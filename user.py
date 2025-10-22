@@ -1,6 +1,6 @@
 
 from werkzeug.utils import secure_filename
-from flask import redirect ,render_template ,url_for ,request ,session
+from flask import redirect ,render_template ,url_for ,request ,session ,abort
 from supabase import Client ,create_client
 import os ,json , random ,time
 from sender import send_email ,oublier_body
@@ -19,8 +19,8 @@ def get_user_data(table,coloms):
 def delet_email(emails):
     for email in emails:
         try:
-            statue=supabase.table('emails').delete().eq("email",email).execute()
-            print(statue)
+            response=supabase.table('emails').delete().eq("email",email).execute()
+            print(response)
         except Exception as error :
             print(error)
     
@@ -44,6 +44,8 @@ def log_out():
     session.clear()
     return redirect(url_for("home"))
 
+
+
 @app.route('/oublier',methods=["POST","GET"])
 def oublier():
     error=""
@@ -63,6 +65,9 @@ def oublier():
         else:
             error= f"عنوان البريد الالكتروني هدا {email} غير مسجل من قبل"
     return render_template('admin/oublier.html',error = error)
+
+
+
 
 @app.route("/code__user_admin")
 def code():
@@ -175,7 +180,7 @@ def profile():
             data={"user":user,"post":posts[::-1]}
             return render_template("pages/profile.html",datas=data) 
     else:
-        return "<h4> error reloud uder data </h4>"
+        abort(404)
 
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
@@ -204,8 +209,7 @@ def add_user():
             filename = f"{safe_name}{ext}"
             path = f"profile/{filename}"
             file_bytes = profile_file.read()
-            response = supabase.storage.from_("images").upload(
-            path=path,
+            response = supabase.storage.from_("images").upload(path=path,
             file=file_bytes,
             file_options={"cache-control": "3600", "upsert": "true"})
             profile_filename = filename

@@ -1,8 +1,8 @@
-from flask import render_template, request, redirect, url_for, session, send_from_directory, jsonify, Response
+from flask import render_template, request, redirect, url_for, session, send_from_directory
 from store import Post,app
 from supabase import create_client, Client
 import os ,uuid ,time
-import ai_chat
+from ai_chat import to_marckdone
 from storage import get_storage_size
 from sender import send_email ,contact_body ,post_add_body
 from datetime import date
@@ -48,8 +48,10 @@ def load_posts(page_name):
 @app.route('/')
 def home():
     session.permanent = True
-    print(session)
+    print(session)  
     return render_template('pages/index.html')
+
+
 
 @app.route("/sender",methods=["POST","GET"])
 def sender():
@@ -163,6 +165,7 @@ def post_add():
     name_in_table = []
 
     if request.method == "POST":
+        t=time.time()
         get_storage_size("images","posts")
         images = [
             request.files.get("img1"),
@@ -236,8 +239,9 @@ def post_add():
             "body":body_excerpt,"page":data["page"],"date":data['date'],'title':data['title'],"name":data["name"]
         }
         session["send_email"]=sendent
-        return redirect(url_for(data["page"]))
-
+        t1=time.time()
+        print(int(t1)-int(t))
+        return "نجاح النشر ..."
     return render_template("admin/post-add.html", error=error)
 
 if __name__ == '__main__':
