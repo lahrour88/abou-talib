@@ -33,6 +33,7 @@ def send_email(users , subject , body):
                   server.send_message(msg)
               except Exception as e:
                   black_list.append(user)
+          print(black_list)
           return "<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>" ,black_list    
 
 def contact_body(email,name,message,classe,subject):
