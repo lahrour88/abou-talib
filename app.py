@@ -241,7 +241,7 @@ def post_add():
         session["send_email"]=sendent
         t1=time.time()
         print(int(t1)-int(t))
-        return "نجاح النشر ..."
+        return redirect(url_for(data["page"]))
     return render_template("admin/post-add.html", error=error)
 
 if __name__ == '__main__':
