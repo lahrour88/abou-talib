@@ -48,7 +48,7 @@ def load_posts(page_name):
 @app.route('/')
 def home():
     session.permanent = True
-    print(session)  
+    print(sesson)  
     return render_template('pages/index.html')
 
 
