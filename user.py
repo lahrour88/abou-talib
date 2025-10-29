@@ -161,11 +161,13 @@ def profile():
     img=None
     for user_ in datas :
         if user_["name"] == name :
-            posts.clear()
-            
+            if not user_["profile_filename"]:
+                profile_img =None
+            else:
+                profile_img=f"{img_profile_url}{user_["profile_filename"]}"
             user={
                 "name":name,
-                "profile":f"{img_profile_url}{user_["profile_filename"]}",
+                "profile":profile_img,
                 "email":user_['email'],
                 "matier":user_["matier"]
                 }
