@@ -19,7 +19,8 @@
             direction: rtl;
             position: relative;
             top: 30px;
-            margin: 8px auto;
+margin:auto;
+            margin-top:15px;
             background: linear-gradient(135deg, #ffffff 0%, #f6f7f9 100%);
             padding: 20px;
             border-radius: 12px;
