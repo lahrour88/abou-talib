@@ -195,7 +195,7 @@ def add_user():
         matier = request.form.get("matier")
         is_admin = request.form.get("is_admin")
 
-        profile_file = request.files["profile"]
+        profile_file = request.files.get("profile")
         profile_filename = ""
         if profile_file:
             
