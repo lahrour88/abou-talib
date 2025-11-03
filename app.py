@@ -152,7 +152,7 @@ def login():
             Response=user_verifiede(email,password)
             if Response == True :
                 print(session)
-                return '<script>window.location.href =f"/profile?name={session.get("name")}"</script>'
+                return redirect(f"https://abou-talib.vercel.app/profile?name={session.get("name")}")
             else:
                 error=Response
     except Exception as e:
