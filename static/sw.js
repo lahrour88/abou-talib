@@ -1,6 +1,6 @@
 // static/sw.js
 
-const CACHE_NAME = 'abou-talib-cache-v2';
+const CACHE_NAME = 'abou-talib-cache-v2.1';
 const ASSETS = [
   '/',
   'templates/appbare.html'
