@@ -227,7 +227,7 @@ def add_user():
         }
 
         response = supabase.table("users").insert(user).execute()
-        return f"تمت العملية بنجاح"
+        return f'<script>window.location.href = "/profile?name={user["name"]}"</script>'
 
     return render_template("admin/add_user.html")
 
