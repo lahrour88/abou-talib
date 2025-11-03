@@ -29,8 +29,10 @@ def handle_404(e=404):
 def sitemap():
     return send_from_directory(app.static_folder,"sitemap.xml")
 
+@app.route('/static/sw.js')
 def service_worker():
-    return send_from_directory('static', 'sw.js')
+    return send_from_directory('static', 'sw.js', mimetype='application/javascript')
+
 @app.route('/robots.txt')
 def robots():
     return send_from_directory(app.static_folder, 'robots.txt')
