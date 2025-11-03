@@ -152,7 +152,7 @@ def login():
             Response=user_verifiede(email,password)
             if Response == True :
                 print(session)
-                return redirect(url_for("post_add"))
+                return '<script>window.location.href =f"/profile?name={session.get(name)}"</script>'
             else:
                 error=Response
     except Exception as e:
