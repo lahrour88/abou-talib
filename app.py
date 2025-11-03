@@ -160,8 +160,8 @@ def login():
     return render_template("admin/login.html", error=error)
 @app.route('/post_add', methods=['GET', 'POST'])
 def post_add():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
+    #if not session.get('logged_in'):
+     #   return redirect(url_for('login'))
 
     error = None
     name_in_table = []
