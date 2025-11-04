@@ -152,9 +152,9 @@ def login():
             Response=user_verifiede(email,password)
             if Response == True :
                 print(session)
-                host=request.headers.get("Host")
+                host = request.headers.get("Host")
                 print(host)
-                return redirect(f"{host}/profile?name={session.get("name")}")
+                return redirect(f"https://{host}/profile?name={session.get('name')}")  
             else:
                 error=Response
     except Exception as e:
