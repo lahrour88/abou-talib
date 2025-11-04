@@ -152,7 +152,8 @@ def login():
             Response=user_verifiede(email,password)
             if Response == True :
                 print(session)
-                return redirect(f"https://abou-talib.vercel.app/profile?name={session.get("name")}")
+                host=request.headers.get("Host")
+                return redirect(f"https:{host}/profile?name={session.get("name")}")
             else:
                 error=Response
     except Exception as e:
@@ -247,4 +248,4 @@ def post_add():
     return render_template("admin/post-add.html", error=error)
 
 if __name__ == '__main__':
-    app.run(debug=True ,host="0.0.0.0",port=5000)
+    app.run(debug=False)
