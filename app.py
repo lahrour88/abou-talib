@@ -153,7 +153,8 @@ def login():
             if Response == True :
                 print(session)
                 host=request.headers.get("Host")
-                return redirect(f"https:{host}/profile?name={session.get("name")}")
+                print(host)
+                return redirect(f"{host}/profile?name={session.get("name")}")
             else:
                 error=Response
     except Exception as e:
