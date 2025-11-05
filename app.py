@@ -192,7 +192,7 @@ def post_add():
                     img = img.convert("RGB") 
                     img.thumbnail((800, 800))  
                     img_bytes = io.BytesIO()
-                    img.save(img_bytes, format="JPEG", quality=70)
+                    img.save(img_bytes, format="JPEG", quality=90)
                     img_bytes.seek(0)
                     file_content = img_bytes.read()
                 except Exception as e:
