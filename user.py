@@ -12,8 +12,11 @@ key = os.getenv('key')
 supabase: Client = create_client(url, key)
 img_post_url=os.getenv('posts_url')
 img_profile_url=os.getenv('profile_url')
-def get_user_data(table,coloms):
-    response = supabase.table(table).select(coloms).execute()
+def get_user_data(table,coloms ,eqvalont=None, eqvalue=None):
+    if eqvalont==None and eqvalue==None:
+        response = supabase.table(table).select(coloms).execute()
+    else:
+        response = supabase.table(table).select(coloms).eq(eqvalont,eqvalue).execute()
     return response.data
 
 def delet_email(emails):

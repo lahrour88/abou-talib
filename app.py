@@ -68,7 +68,7 @@ def sender():
             session.pop("send_email")
             body_excerpt=data["body"]
             body_html = post_add_body( body_excerpt,data['page'],data['date'],data['title'], data["name"])
-            users = get_user_data(table="emails", coloms="email")
+            users = get_user_data(table="emails", coloms="email" ,eqvalont="is_active", eqvalue=True)
             userse=[]
             for user in users:
                 userse.append(user['email'])
