@@ -240,7 +240,7 @@ def verify_subscription_body(email,host, token):
         إن لم تكن أنت من طلبه فالمرجو إبلاغ المسؤول بالأمر: 
         <a href="https://abou-talib.vercel.app/contact" style="text-decoration:none; color:#0645AD;">ابلاغ المسؤول</a>
       </p>
-      <a href="https://{host}/confirm_subscription{token}"><h1 style="background-color:aliceblue; width:120px; padding:7px; text-align:center; margin:30px auto 20px auto; border-radius:8px; font-size:20px; font-weight:bold;">تاكيد الاشتراك </h1></a>
+      <a href="https://{host}/confirm_subscription?token={token}"><h1 style="background-color:aliceblue; width:120px; padding:7px; text-align:center; margin:30px auto 20px auto; border-radius:8px; font-size:20px; font-weight:bold;">تاكيد الاشتراك </h1></a>
       <p style="margin: 3px; margin-top:50px; direction:rtl; color:rgba(97, 97, 97, 0.836); font-size:12px; line-height:1.5;">
         ستنتهي صلاحية هذا الرمز خلال 24 ساعة، يرجى عدم مشاركته مع الآخرين.<br>
         إذا لم تقم بتقديم هذا الطلب، يرجى تجاهل هذا البريد الإلكتروني.

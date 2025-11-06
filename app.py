@@ -101,7 +101,7 @@ def subscribe():
             print("Subscription response:", response)
     return " <span> المرجو تفقد بريدك</span> "
 
-@app.route('/verifications_supscriping', methods=['GET'])
+@app.route('/confirm_subscription', methods=['GET'])
 def confirm_subscription():
     token = request.args.get('token')
     if token and session.get('token') == token:
