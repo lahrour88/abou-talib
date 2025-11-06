@@ -4,13 +4,14 @@ from supabase import create_client, Client
 import os ,uuid ,time
 from ai_chat import to_marckdone
 from storage import get_storage_size
-from sender import send_email ,contact_body ,post_add_body
+from sender import send_email ,contact_body ,post_add_body ,verify_subscription_body
 from datetime import date
 from dotenv import load_dotenv
 from user import user_verifiede ,get_user_data ,delet_email
 from datetime import timedelta 
 from werkzeug.utils import secure_filename
 from PIL import Image ,ImageOps
+from uuid import uuid4
 import io
 load_dotenv()
 app.secret_key = os.getenv("secret_key")
@@ -77,6 +78,9 @@ def sender():
         else:
             message="<span>لا يوجد منشور لإرساله</span>"
             return message
+
+    
+
 @app.route("/message", methods=["POST"])
 def subscribe():
     email = request.form.get("Email")
@@ -86,11 +90,28 @@ def subscribe():
         if verified_email.data :
             return "<span>انت مسجل من قبل</span>"
         else:
-            data = {"email": email}
+            data = {"email": email,"is_active":False}
             response = supabase.table("emails").insert(data).execute()
+            session['email']=email
+            token = str(uuid4())
+            session['token']=token
+            host=request.headers.get('Host')
+            print(host)
+            send_email([email], subject="تأكيد الاشتراك في النشرة البريدية", body=verify_subscription_body(email,host, token))
             print("Subscription response:", response)
-    return " <span>تم تسجيلك بنجاح</span>"
-@app.route('/sw.js')
+    return " <span> المرجو تفقد بريدك</span> "
+
+@app.route('/verifications_supscriping', methods=['GET'])
+def confirm_subscription():
+    token = request.args.get('token')
+    if token and session.get('token') == token:
+        email = session.get('email')
+        if email:
+            supabase.table('emails').update({'is_active': True}).eq('email', email).execute()
+            session.pop('email', None)
+            session.pop('token', None)
+            return redirect(url_for('home'))
+    return "رابط التأكيد غير صالح أو منتهي الصلاحية.", 400
 @app.route('/takafa',methods=['POST',"GET"])
 def takafa():
     data=load_posts("takafa")
@@ -162,8 +183,8 @@ def login():
     return render_template("admin/login.html", error=error)
 @app.route('/post_add', methods=['GET', 'POST'])
 def post_add():
-    #if not session.get('logged_in'):
-     #   return redirect(url_for('login'))
+    if not session.get('logged_in'):
+       return redirect(url_for('login'))
 
     error = None
     name_in_table = []
@@ -249,4 +270,4 @@ def post_add():
     return render_template("admin/post-add.html", error=error)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run( host="0.0.0.0",debug=True)
