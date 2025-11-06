@@ -84,10 +84,17 @@ def sender():
 def subscribe():
     email = request.form.get("Email")
     if email:
-        verified_email=supabase.table('emails').select('email').eq("email",email).execute()
-        print(verified_email)
+        verified_email=supabase.table('emails').select('*').eq("email",email).execute()
         if verified_email.data :
-            return "<span>انت مسجل من قبل</span>"
+            if verified_email.data[0]['is_active'] == True:
+                return "<span>انت مسجل من قبل</span>"
+            else:
+                session['email']=email
+                token = str(uuid4())
+                session['token']=token
+                host=request.headers.get('Host')
+                print(host)
+                print(send_email([email], subject="تأكيد الاشتراك في النشرة البريدية", body=verify_subscription_body(email,host, token)))
         else:
             data = {"email": email,"is_active":False}
             response = supabase.table("emails").insert(data).execute()
@@ -96,8 +103,7 @@ def subscribe():
             session['token']=token
             host=request.headers.get('Host')
             print(host)
-            send_email([email], subject="تأكيد الاشتراك في النشرة البريدية", body=verify_subscription_body(email,host, token))
-            print("Subscription response:", response)
+            print(send_email([email], subject="تأكيد الاشتراك في النشرة البريدية", body=verify_subscription_body(email,host, token)))
     return " <span> المرجو تفقد بريدك</span> "
 
 @app.route('/confirm_subscription', methods=['GET'])

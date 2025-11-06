@@ -10,18 +10,20 @@ sender_email = os.getenv("email_sender")
 password = os.getenv("email_password")
 def send_email(users , subject , body):
     with smtplib.SMTP("smtp.gmail.com", 587) as server:
-      server.starttls()
-      server.login(sender_email, password)
-      if users :
-          try:
-              msg = MIMEText(body, "html", "utf-8")
-              msg['Subject'] = subject
-              msg['From'] = sender_email
-              msg['To'] = ",".join([users])
-              server.send_message(msg)
-          except Exception as e:
-              return e
-          return "<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>"
+        server.starttls()
+        server.login(sender_email, password)
+        if users :
+            try:
+                msg = MIMEText(body, "html", "utf-8")
+                msg['Subject'] = subject
+                msg['From'] = sender_email
+                msg['To'] = ",".join(users)
+                server.send_message(msg)
+            except Exception as e:
+                return e
+    print("Emails sent successfully.")
+    print(users)
+    return "<span>.تم إرسال التنبيهات إلى المشتركين بنجاح</span>"
 
 def contact_body(email,name,message,classe,subject):
     body=f"""
