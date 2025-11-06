@@ -19,13 +19,7 @@ def get_user_data(table,coloms ,eqvalont=None, eqvalue=None):
         response = supabase.table(table).select(coloms).eq(eqvalont,eqvalue).execute()
     return response.data
 
-def delet_email(emails):
-    for email in emails:
-        try:
-            response=supabase.table('emails').delete().eq("email",email).execute()
-            print(response)
-        except Exception as error :
-            print(error)
+
     
 @app.route('/delet',methods=['POST',"GET"])
 def delet():

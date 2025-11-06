@@ -7,7 +7,7 @@ from storage import get_storage_size
 from sender import send_email ,contact_body ,post_add_body ,verify_subscription_body
 from datetime import date
 from dotenv import load_dotenv
-from user import user_verifiede ,get_user_data ,delet_email
+from user import user_verifiede ,get_user_data 
 from datetime import timedelta 
 from werkzeug.utils import secure_filename
 from PIL import Image ,ImageOps
@@ -72,8 +72,7 @@ def sender():
             userse=[]
             for user in users:
                 userse.append(user['email'])
-            result ,emails_delet =send_email(userse, subject=f"📢 منشور جديد: {data['title']}", body=body_html)
-            delet_email(emails_delet)
+            result =send_email(userse, subject=f"📢 منشور جديد: {data['title']}", body=body_html)
             return result
         else:
             message="<span>لا يوجد منشور لإرساله</span>"
