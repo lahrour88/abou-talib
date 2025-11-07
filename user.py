@@ -57,7 +57,7 @@ def oublier():
                 session["id"]=user["id"]
                 body=oublier_body(email,code__)
                 subject=f"{code__} هو رمز اعادة تعيين كلمة السر الخاصة بك"
-                send_email(email ,subject , body)
+                send_email([email] ,subject , body)
                 return redirect(url_for('code'))
         else:
             error= f"عنوان البريد الالكتروني هدا {email} غير مسجل من قبل"
