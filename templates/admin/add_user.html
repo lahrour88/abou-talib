@@ -24,7 +24,7 @@
 <body>
   {%include "appbare.html"%}
   <br><br>
-  <form id="postForm" hx-post="/add_user" hx-target="#result" enctype="multipart/form-data">
+  <form action="/add_user" method="POST" enctype="multipart/form-data">
     <div>
       <label for="name">الاسم الكامل</label>
       <input type="text" id="name" name="name" placeholder="أدخل الاسم الكامل" required>
@@ -55,14 +55,11 @@
         <option value="True">أدمن</option>
       </select>
     </div>
-    <div id="message-container"
-     hx-get="/repo"
-     hx-trigger="load, every 1s"
-     hx-swap="innerHTML">
-</div>
-
     <div id="result"></div>
     <div class="button">
+      {% if error %}
+      <span style="color: red;">{{ error }}</span>
+      {% endif %}
       <input type="submit" id="submitBtn" value="إضافة المستخدم">
     </div>
   </form>

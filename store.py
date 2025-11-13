@@ -1,6 +1,6 @@
 
 from flask import Flask 
-app = Flask(__name__)
+app = Flask(__name__ )
 
 class Post:
     def __init__(self, body,date ,page,title,name,topic ,img1 ,img2,img3,img4):

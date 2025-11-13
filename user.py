@@ -6,6 +6,7 @@ import os ,json , random ,time
 from sender import send_email ,oublier_body
 from dotenv import load_dotenv
 from store import app ,users
+import time
 load_dotenv()
 url = os.getenv('url')
 key = os.getenv('key')
@@ -150,6 +151,7 @@ def post_data_storage():
     return response.data
 @app.route("/profile",methods=["POST","GET"])
 def profile():
+    session.permanent = True
     name =request.args.get("name")
     posts=[]
     datas=get_user_data(table="users",coloms="*")
@@ -183,49 +185,51 @@ def profile():
 
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
-    if not session.get("logged_in"):
-        return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
-    if not session.get("is_admin"):
-        return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        matier = request.form.get("matier")
-        is_admin = request.form.get("is_admin")
+    try :
+        if not session.get("logged_in"):
+            return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
+        if not session.get("is_admin"):
+            return "نتاسف لكن عضويتك لا تسمح لك باضافة مستخدمين جدد "
+        if request.method == "POST":
+            name = request.form.get("name")
+            email = request.form.get("email")
+            password = request.form.get("password")
+            matier = request.form.get("matier")
+            is_admin = request.form.get("is_admin")
 
-        profile_file = request.files.get("profile")
-        profile_filename = ""
-        if profile_file:
-            
-            # نجيب الامتداد الأصلي (png/jpg/jpeg)
-            ext = os.path.splitext(profile_file.filename)[1].lower()
-            exts=[".png", ".jpg", ".jpeg"]
-            if ext not in exts:
-                return f"امتداد الملف غير مدعوم "
-            # اسم الملف يكون username + الامتداد
-            safe_name = secure_filename(name)  
-            filename = f"{safe_name}{ext}"
-            path = f"profile/{filename}"
-            file_bytes = profile_file.read()
-            response = supabase.storage.from_("images").upload(path=path,
-            file=file_bytes,
-            file_options={"cache-control": "3600", "upsert": "true"})
-            profile_filename = filename
-        new_user = users(password, email, name, matier, is_admin, profile_filename)
+            profile_file = request.files.get("profile")
+            profile_filename = ""
+            if profile_file:
+                
+                # نجيب الامتداد الأصلي (png/jpg/jpeg)
+                ext = os.path.splitext(profile_file.filename)[1].lower()
+                exts=[".png", ".jpg", ".jpeg"]
+                if ext not in exts:
+                    return render_template("admin/add_user.html", error="نوع الملف غير مدعوم. الرجاء رفع صورة بامتداد png, jpg, أو jpeg.")
+                # اسم الملف يكون username + الامتداد
+                safe_name = secure_filename(name)  
+                filename = f"{safe_name}{ext}"
+                path = f"profile/{filename}"
+                file_bytes = profile_file.read()
+                response = supabase.storage.from_("images").upload(path=path,
+                file=file_bytes,
+                file_options={"cache-control": "3600", "upsert": "true"})
+                profile_filename = filename
+            new_user = users(password, email, name, matier, is_admin, profile_filename)
+            user = {
+                "name": new_user.name,
+                "password": new_user.password,
+                "email": new_user.email,
+                "matier": new_user.matier,
+                "is_admin": new_user.is_admin,
+                "profile_filename": new_user.profile_filename
+            }
 
-        user = {
-            "name": new_user.name,
-            "password": new_user.password,
-            "email": new_user.email,
-            "matier": new_user.matier,
-            "is_admin": new_user.is_admin,
-            "profile_filename": new_user.profile_filename
-        }
-
-        response = supabase.table("users").insert(user).execute()
-        return f'<script>window.location.href = "/profile?name={user["name"]}"</script>'
-
+            response = supabase.table("users").insert(user).execute()
+            return redirect(url_for('profile',name=name))
+    except Exception as e:
+        print(e)
+        return render_template("admin/add_user.html", error="حدث خطأ أثناء إضافة المستخدم. الرجاء المحاولة مرة أخرى.")
     return render_template("admin/add_user.html")
 
 def to_int(val):
