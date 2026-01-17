@@ -165,8 +165,15 @@ def contact__():
 @app.route("/contact",methods=["POST","GET"])
 def contact():
     return render_template('pages/contact.html')
-
-
+@app.route('/test',methods=["POST","GET"])
+def test():
+    if request.method == "POST":
+        username=request.form.get('username')
+        password=request.form.get("password")
+        if username == "abdelaadime@zohomail.com" and password=="admin123":
+            print("true")
+            return redirect(url_for('home'))
+        
 @app.route("/login", methods=["GET", "POST"])
 def login():
     try:
