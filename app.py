@@ -171,8 +171,9 @@ def test():
         username=request.form.get('username')
         password=request.form.get("password")
         if username == "abdelaadime@zohomail.com" and password=="admin123":
-            print("true")
+            
             return redirect(url_for('home'))
+    return """<span>المرجو تفقد بريدك</span>"""
         
 @app.route("/login", methods=["GET", "POST"])
 def login():
